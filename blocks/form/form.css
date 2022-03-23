@@ -1,0 +1,10 @@
+.form {
+   position: absolute;
+   right: 0;
+}
+
+@media screen and (max-width: 767px) {
+   .form {
+      position: relative;
+   }
+}
