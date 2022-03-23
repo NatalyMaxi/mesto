@@ -1,6 +1,14 @@
 .header {
-display: flex;
+   display: flex;
    height: 74px;
    margin: 0 auto;
    padding: 0;
+   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}
+
+@media screen and (max-width: 767px) {
+   .header {
+      height: 56px;
+      padding-left: 27px;
+   }
 }
