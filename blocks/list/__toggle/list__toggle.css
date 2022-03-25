@@ -1,0 +1,12 @@
+.list__toggle {
+   background-image: url(../../../images/Vector\ сердце.svg);
+   width: 25px;
+   height: 19px;
+   border: none;
+   margin-right: 25px;
+   background-color: #FFFFFF;
+    background-size: auto;
+   background-repeat: no-repeat;
+   background-position: center;
+   padding: 0;
+}

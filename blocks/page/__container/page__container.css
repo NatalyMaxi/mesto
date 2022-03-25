@@ -4,6 +4,7 @@
    margin: 0 auto;
    padding: 45px 200px 60px;
    box-sizing: border-box;
+   min-width: 320px;
 }
 @media screen and (max-width: 1023px) {
    .page__container {

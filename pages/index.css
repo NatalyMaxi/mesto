@@ -1,5 +1,6 @@
 ﻿@import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
+@import url(../blocks/container/container.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__container/page__container.css);
 @import url(../blocks/header/header.css);
@@ -10,6 +11,11 @@
 @import url(../blocks/profile/__title/profile__title.css);
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/button/button.css);
-@import url(../blocks/pictures/pictures.css);
+@import url(../blocks/list/list.css);
+@import url(../blocks/list/__items/list__items.css);
+@import url(../blocks/list/__image/list__image.css);
+@import url(../blocks/list/__item/list__item.css);
+@import url(../blocks/list/__title/list__title.css);
+@import url(../blocks/list/__toggle/list__toggle.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

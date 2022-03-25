@@ -1,0 +1,10 @@
+.list__item {
+   background-color: #FFFFFF;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   max-width: 282px;
+   max-height: 282px;
+   border-radius: 0 0 10px 10px;
+   height: 79px;
+}
