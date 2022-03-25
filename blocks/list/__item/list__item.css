@@ -1,0 +1,9 @@
+.list__item {
+   display: flex;
+   justify-content: space-between;
+   padding: 25px 15px 27px 21px;
+   max-width: 282px;
+   box-sizing: border-box;
+   height: 79px;
+   align-items: center;
+}
