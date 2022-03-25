@@ -1,0 +1,26 @@
+.profile__btn {
+   cursor: pointer;
+   border: 1px solid #ffffff;
+   width: 24px;
+   height: 24px;
+   background: #000000;
+   background-image: url(../../../images/Vector\ карандаш.svg);
+   background-repeat: no-repeat;
+   background-position: center;
+   position: absolute;
+   top: 15px;
+   right: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+.profile__btn:hover {
+   opacity: 0.6;
+}
+@media screen and (max-width: 767px) {
+   .profile__btn {
+      width: 18px;
+      height: 18px;
+      top: 8px;
+      right: 10px;
+   }
+}
