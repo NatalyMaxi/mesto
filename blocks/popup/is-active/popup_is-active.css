@@ -1,3 +1,4 @@
 .popup_is-active {
-   display: block;
+   visibility: visible;
+   opacity: 1;
 }

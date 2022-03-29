@@ -14,6 +14,7 @@
    box-sizing: border-box;
    border: none;
    cursor: pointer;
+   transition: all 0.5s ease;
 }
 .popup__close:hover {
    opacity: 0.6;
