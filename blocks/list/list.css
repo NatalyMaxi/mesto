@@ -9,3 +9,9 @@
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 767px) {
+  .list {
+    margin-left: 19px;
+    margin-right: 19px;
+  }
+}
