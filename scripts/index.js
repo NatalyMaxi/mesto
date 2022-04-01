@@ -7,20 +7,23 @@ let jobinput = document.querySelector('[name="about-me"]');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 
-function toggleModalWindow() {
-  modalWindow.classList.toggle('popup_is-active');
+
+profileEditingButton.addEventListener('click', function () {
+  modalWindow.classList.add('popup_is-active');
   nameInput.value = profileTitle.textContent;
   jobinput.value = profileSubtitle.textContent;
-}
+});
+
+modalCloseBtn.addEventListener('click', function () {
+  modalWindow.classList.remove('popup_is-active');
+});
+
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobinput.value;
-  toggleModalWindow()
+  modalWindow.classList.remove('popup_is-active');
 }
-
-profileEditingButton.addEventListener('click', toggleModalWindow);
-modalCloseBtn.addEventListener('click', toggleModalWindow);
 
 formElement.addEventListener('submit', formSubmitHandler); 
