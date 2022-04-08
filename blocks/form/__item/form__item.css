@@ -12,6 +12,32 @@
    align-items: flex-end;
 }
 
+.form__item::placeholder {
+   font-size: 14px;
+   line-height: 17px;
+   font-weight: 400;
+   color: #c4c4c4;
+}
+
+.form__item::-webkit-input-placeholder {
+   font-size: 14px;
+   line-height: 17px;
+   font-weight: 400;
+   color: #c4c4c4;
+}
+
+.form__item::-moz-placeholder {
+   font-size: 14px;
+   line-height: 17px;
+   font-weight: 400;
+   color: #c4c4c4;
+}
+.form__item::-ms-input-placeholder {
+   font-size: 14px;
+   line-height: 17px;
+   font-weight: 400;
+   color: #c4c4c4;
+}
 
 @media screen and (max-width: 767px) {
    .form__item {
