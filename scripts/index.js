@@ -30,12 +30,11 @@ const modalCloseBtn = document.querySelector('.popup__close');
 let formElement = document.querySelector('.form');
 let nameInput = document.querySelector('[name="full-name"]');
 let jobinput = document.querySelector('[name="about-me"]');
-// let profileTitle = document.querySelector('.profile__title');
-// let profileSubtitle = document.querySelector('.profile__subtitle');
+let profileTitle = document.querySelector('.profile__title');
+let profileSubtitle = document.querySelector('.profile__subtitle');
+const listContainer = document.querySelector('.list');
+const template = document.querySelector('.template');
 
-
-const picturesAddButton = document.querySelector('.profile__button');
-const windowAddingImages = document.querySelector('.popup_type_new-card');
 
 profileEditingButton.addEventListener('click', function () {
   modalWindow.classList.add('popup_is-active');
@@ -56,15 +55,6 @@ function formSubmitHandler(evt) {
 formElement.addEventListener('submit', formSubmitHandler);
 modalCloseBtn.addEventListener('click', closeModalWindow);
 
-
-
-// picturesAddButton.addEventListener('click', function () {
-//   windowForAddingImages.classList.add('popup_is-active');
-// })
-
-const listContainer = document.querySelector('.list');
-const template = document.querySelector('.template');
-
 function render() {
   const html = initialCards.map(getElement);
   listContainer.append(...html);
@@ -83,4 +73,3 @@ function getElement(item) {
 
 render();
 
-function openPopup()
