@@ -17,6 +17,7 @@
 @import url(../blocks/list/__item/list__item.css);
 @import url(../blocks/list/__title/list__title.css);
 @import url(../blocks/list/__toggle/list__toggle.css);
+@import url(../blocks/list/__btn/list__btn.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);
