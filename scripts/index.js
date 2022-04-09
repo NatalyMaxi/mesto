@@ -25,40 +25,61 @@ const initialCards = [
   }
 ];
 const profileEditingButton = document.querySelector('.profile__btn');
+const imageAddButton = document.querySelector('.profile__button');
 const modalWindow = document.querySelector('.popup');
-const modalCloseBtn = document.querySelector('.popup__close');
 let formElement = document.querySelector('.form');
 let nameInput = document.querySelector('[name="full-name"]');
 let jobinput = document.querySelector('[name="about-me"]');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
+const editCloseBtn = document.querySelector('.popup__close_type_edit');
+const addCloseBtn = document.querySelector('.popup__close_type_add');
+const imageCloseBtn = document.querySelector('.popup__close_type_image');
+const modalWindowEdit = document.querySelector('.popup_type_edit');
+const modalWindowAdd = document.querySelector('.popup_type_add');
+const modalWindowImage = document.querySelector('.popup_type_image');
 const listContainer = document.querySelector('.list');
 const template = document.querySelector('.template');
 
+function openPopup(modalWindow) {
+  modalWindow.classList.add('popup_is-active');
+};
+
+function closePopup(modalWindow) {
+  modalWindow.classList.remove('popup_is-active');
+};
 
 profileEditingButton.addEventListener('click', function () {
-  modalWindow.classList.add('popup_is-active');
+  openPopup(modalWindowEdit);
   nameInput.value = profileTitle.textContent;
   jobinput.value = profileSubtitle.textContent;
 });
 
-function closeModalWindow() {
-  modalWindow.classList.remove('popup_is-active');
-};
+imageAddButton.addEventListener('click', () => {
+  openPopup(modalWindowAdd);
+});
+
+editCloseBtn.addEventListener('click', () => {
+  closePopup(modalWindowEdit);
+});
+
+addCloseBtn.addEventListener('click', () => {
+  closePopup(modalWindowAdd);
+});
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobinput.value;
-  closeModalWindow();
+  closePopup(modalWindowEdit);
 };
+
 formElement.addEventListener('submit', formSubmitHandler);
-modalCloseBtn.addEventListener('click', closeModalWindow);
 
 function render() {
   const html = initialCards.map(getElement);
   listContainer.append(...html);
-}
+};
 
 function getElement(item) {
   const getElementTemplate = template.content.cloneNode(true);
@@ -69,7 +90,7 @@ function getElement(item) {
   link.alt = item.name;
 
   return getElementTemplate;
-}
+};
 
 render();
 
