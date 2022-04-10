@@ -90,20 +90,18 @@ function getElement(item) {
   link.src = item.link;
   link.alt = item.name;
 
+  function removeElement(evt) {
+    const element = evt.target.closest('.list__items');
+    element.remove();
+  };
   removeBtn.addEventListener('click', removeElement);
+
   likeBtn.addEventListener('click', function (evt) {
     evt.target.classList.toggle('list__toggle_active')
   });
 
   return getElementTemplate;
 };
-
-function removeElement(evt) {
-  const element = evt.target.closest('.list__items');
-  element.remove();
-};
-
-
 
 function ImageAddFormSubmitHandler(evt) {
   evt.preventDefault();
@@ -116,8 +114,6 @@ function ImageAddFormSubmitHandler(evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', ImageAddFormSubmitHandler);
-
-
 
 
 render();
