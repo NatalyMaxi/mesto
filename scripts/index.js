@@ -33,8 +33,6 @@ let nameInput = formElement.querySelector('[name="full-name"]');
 let jobinput = formElement.querySelector('[name="about-me"]');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
-let regionInput = formElementAdd.querySelector('[name="region"]');
-let linkinput = formElementAdd.querySelector('[name="link"]');
 const modalWindowEdit = document.querySelector('.popup_type_edit');
 const modalWindowAdd = document.querySelector('.popup_type_add');
 const modalWindowImage = document.querySelector('.popup_type_image');
@@ -77,8 +75,6 @@ function formSubmitHandler(evt) {
   closePopup(modalWindowEdit);
 };
 
-formElement.addEventListener('submit', formSubmitHandler);
-
 function render() {
   const html = initialCards.map(getElement);
   listContainer.append(...html);
@@ -95,12 +91,19 @@ function getElement(item) {
   return getElementTemplate;
 };
 
-render();
-
 function ImageAddFormSubmitHandler(evt) {
   evt.preventDefault();
-  
+  let regionInput = formElementAdd.querySelector('[name="region"]').value;
+  let linkinput = formElementAdd.querySelector('[name="link"]').value;
+  const element = getElement({ name: regionInput, link: linkinput });
+  listContainer.prepend(element);
   closePopup(modalWindowAdd);
 };
 
+formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', ImageAddFormSubmitHandler);
+
+
+
+
+render();
