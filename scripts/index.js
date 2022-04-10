@@ -27,17 +27,20 @@ const initialCards = [
 const profileEditingButton = document.querySelector('.profile__btn');
 const imageAddButton = document.querySelector('.profile__button');
 const modalWindow = document.querySelector('.popup');
-let formElement = document.querySelector('.form');
-let nameInput = document.querySelector('[name="full-name"]');
-let jobinput = document.querySelector('[name="about-me"]');
+let formElement = document.querySelector('[name="subscribeForm"]');
+let formElementAdd = document.querySelector('[name="add-images"]')
+let nameInput = formElement.querySelector('[name="full-name"]');
+let jobinput = formElement.querySelector('[name="about-me"]');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
-const editCloseBtn = document.querySelector('.popup__close_type_edit');
-const addCloseBtn = document.querySelector('.popup__close_type_add');
-const imageCloseBtn = document.querySelector('.popup__close_type_image');
+let regionInput = formElementAdd.querySelector('[name="region"]');
+let linkinput = formElementAdd.querySelector('[name="link"]');
 const modalWindowEdit = document.querySelector('.popup_type_edit');
 const modalWindowAdd = document.querySelector('.popup_type_add');
 const modalWindowImage = document.querySelector('.popup_type_image');
+const editCloseBtn = modalWindowEdit.querySelector('.popup__close_type_edit');
+const addCloseBtn = modalWindowAdd.querySelector('.popup__close_type_add');
+const imageCloseBtn = modalWindowImage.querySelector('.popup__close_type_image');
 const listContainer = document.querySelector('.list');
 const template = document.querySelector('.template');
 
@@ -94,3 +97,10 @@ function getElement(item) {
 
 render();
 
+function ImageAddFormSubmitHandler(evt) {
+  evt.preventDefault();
+  
+  closePopup(modalWindowAdd);
+};
+
+formElementAdd.addEventListener('submit', ImageAddFormSubmitHandler);
