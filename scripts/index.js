@@ -86,6 +86,8 @@ function getElement(item) {
   const link = getElementTemplate.querySelector('.list__image');
   const removeBtn = getElementTemplate.querySelector('.list__btn');
   const likeBtn = getElementTemplate.querySelector('.list__toggle');
+  
+  
   name.textContent = item.name;
   link.src = item.link;
   link.alt = item.name;
@@ -99,6 +101,15 @@ function getElement(item) {
   likeBtn.addEventListener('click', function (evt) {
     evt.target.classList.toggle('list__toggle_active')
   });
+
+  link.addEventListener('click', () => {
+    openPopup(modalWindowImage);
+
+  });
+  imageCloseBtn.addEventListener('click', () => {
+    closePopup(modalWindowImage);
+  });
+
 
   return getElementTemplate;
 };
