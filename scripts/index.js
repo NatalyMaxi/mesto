@@ -27,8 +27,8 @@ const initialCards = [
 const profileEditingButton = document.querySelector('.profile__btn');
 const imageAddButton = document.querySelector('.profile__button');
 const modalWindow = document.querySelector('.popup');
-let formElement = document.querySelector('[name="subscribeForm"]');
-let formElementAdd = document.querySelector('[name="add-images"]')
+const formElement = document.querySelector('[name="subscribeForm"]');
+const formElementAdd = document.querySelector('[name="add-images"]')
 let nameInput = formElement.querySelector('[name="full-name"]');
 let jobinput = formElement.querySelector('[name="about-me"]');
 let profileTitle = document.querySelector('.profile__title');
