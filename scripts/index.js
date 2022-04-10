@@ -84,12 +84,26 @@ function getElement(item) {
   const getElementTemplate = template.content.cloneNode(true);
   const name = getElementTemplate.querySelector('.list__title');
   const link = getElementTemplate.querySelector('.list__image');
+  const removeBtn = getElementTemplate.querySelector('.list__btn');
+  const likeBtn = getElementTemplate.querySelector('.list__toggle');
   name.textContent = item.name;
   link.src = item.link;
   link.alt = item.name;
 
+  removeBtn.addEventListener('click', removeElement);
+  likeBtn.addEventListener('click', function (evt) {
+    evt.target.classList.toggle('list__toggle_active')
+  });
+
   return getElementTemplate;
 };
+
+function removeElement(evt) {
+  const element = evt.target.closest('.list__items');
+  element.remove();
+};
+
+
 
 function ImageAddFormSubmitHandler(evt) {
   evt.preventDefault();
