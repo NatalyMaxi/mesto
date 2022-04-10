@@ -41,6 +41,8 @@ const addCloseBtn = modalWindowAdd.querySelector('.popup__close_type_add');
 const imageCloseBtn = modalWindowImage.querySelector('.popup__close_type_image');
 const listContainer = document.querySelector('.list');
 const template = document.querySelector('.template');
+const showImage = modalWindowImage.querySelector('.popup__img');
+const showCaption = modalWindowImage.querySelector('.popup__caption');
 
 function openPopup(modalWindow) {
   modalWindow.classList.add('popup_is-active');
@@ -86,8 +88,7 @@ function getElement(item) {
   const link = getElementTemplate.querySelector('.list__image');
   const removeBtn = getElementTemplate.querySelector('.list__btn');
   const likeBtn = getElementTemplate.querySelector('.list__toggle');
-  
-  
+
   name.textContent = item.name;
   link.src = item.link;
   link.alt = item.name;
@@ -96,6 +97,7 @@ function getElement(item) {
     const element = evt.target.closest('.list__items');
     element.remove();
   };
+  
   removeBtn.addEventListener('click', removeElement);
 
   likeBtn.addEventListener('click', function (evt) {
@@ -103,13 +105,15 @@ function getElement(item) {
   });
 
   link.addEventListener('click', () => {
+    showImage.src = item.link;
+    showCaption.alt = item.name;
+    showCaption.textContent = item.name;
     openPopup(modalWindowImage);
-
   });
+
   imageCloseBtn.addEventListener('click', () => {
     closePopup(modalWindowImage);
   });
-
 
   return getElementTemplate;
 };
@@ -125,6 +129,5 @@ function ImageAddFormSubmitHandler(evt) {
 
 formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', ImageAddFormSubmitHandler);
-
 
 render();
