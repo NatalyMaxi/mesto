@@ -1,6 +1,14 @@
 .form {
    margin-top: 27px;
 }
+
+.form__error_visible {
+   font-size: 12px;
+   font-weight: 400;
+   line-height: 15px;
+   color: #f00;
+}
+
 @media screen and (max-width: 767px) {
    .form {
       margin-top: 40px;
