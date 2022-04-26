@@ -43,11 +43,21 @@ const template = document.querySelector('.template');
 const cardImage = modalWindowImage.querySelector('.popup__img');
 const cardCaption = modalWindowImage.querySelector('.popup__caption');
 
+const handleEscUp = (evt) => {
+  evt.preventDefault();
+  const activePopup = document.querySelector('.popup_is-active')
+  if (evt.keyCode === 27) {
+    closePopup(activePopup);
+  }
+}
+
 function openPopup(modalWindowEdit) {
+  document.addEventListener('keydown', handleEscUp);
   modalWindowEdit.classList.add('popup_is-active');
 };
 
 function closePopup(modalWindowEdit) {
+  document.removeEventListener('keydown', handleEscUp);
   modalWindowEdit.classList.remove('popup_is-active');
 };
 

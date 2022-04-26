@@ -39,6 +39,7 @@
             <form class="form" name="subscribeForm" novalidate>
 
                <input
+               id="name-input"
                minlength="2"
                maxlength="40"
                required
@@ -46,9 +47,10 @@
                class="form__item"
                name="full-name">
 
-               <span class="form__error form__error_visible"></span>
+               <span class="form__error form__error_visible form__error_place_top" id="name-input-error"></span>
 
                <input
+               id="description-input"
                minlength="2"
                maxlength="200"
                required
@@ -56,9 +58,9 @@
                class="form__item"
                name="about-me">
 
-               <span class="form__error form__error_visible"></span>
+               <span class="form__error form__error_visible form__error_place_bottom" id="description-input-error"></span>
 
-               <button class="form__button" type="submit" aria-label="Сохранить">Сохранить</button>
+               <button class="form__button" type="submit" aria-label="Сохранить" disabled>Сохранить</button>
             </form>
          </div>
       </div>
@@ -78,6 +80,7 @@
             <form class="form" name="add-images" novalidate>
 
                <input
+               id="region-input"
                minlength="2"
                maxlength="30"
                required
@@ -86,18 +89,19 @@
                class="form__item"
                name="region">
 
-               <span class="form__error form__error_visible"></span>
+               <span class="form__error form__error_visible form__error_place_top" id="region-input-error"></span>
 
                <input
+               id="link-input"
                required
                type="url"
                placeholder="Ссылка на картинку"
                class="form__item"
                name="link">
 
-               <span class="form__error form__error_visible"></span>
+               <span class="form__error form__error_visible form__error_place_bottom" id="link-input-error"></span>
 
-               <button class="form__button" type="submit" aria-label="Создать">Создать</button>
+               <button class="form__button" type="submit" aria-label="Создать" disabled>Создать</button>
             </form>
          </div>
       </div>
