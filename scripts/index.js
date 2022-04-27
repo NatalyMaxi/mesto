@@ -26,39 +26,48 @@ const initialCards = [
 ];
 const profileEditingButton = document.querySelector('.profile__btn');
 const imageAddButton = document.querySelector('.profile__button');
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
+
 const formElement = document.querySelector('[name="subscribeForm"]');
 const formElementAdd = document.querySelector('[name="add-images"]')
 const nameInput = formElement.querySelector('[name="full-name"]');
 const jobinput = formElement.querySelector('[name="about-me"]');
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
+
+const popups = document.querySelectorAll('.popup');
 const modalWindowEdit = document.querySelector('.popup_type_edit');
 const modalWindowAdd = document.querySelector('.popup_type_add');
 const modalWindowImage = document.querySelector('.popup_type_image');
-const cardCloseBtn = modalWindowEdit.querySelector('.popup__close_type_edit');
-const popupCloseBtn = modalWindowAdd.querySelector('.popup__close_type_add');
-const imageCloseBtn = modalWindowImage.querySelector('.popup__close_type_image');
+
 const listContainer = document.querySelector('.list');
 const template = document.querySelector('.template');
 const cardImage = modalWindowImage.querySelector('.popup__img');
 const cardCaption = modalWindowImage.querySelector('.popup__caption');
 
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+      closePopup(popup);
+    }
+  })
+})
+
 const handleEscUp = (evt) => {
-  evt.preventDefault();
+  evt.preventDefault()
   const activePopup = document.querySelector('.popup_is-active')
   if (evt.keyCode === 27) {
     closePopup(activePopup);
   }
 }
 
+function closePopup(popup) {
+  document.removeEventListener('keydown', handleEscUp);
+  popup.classList.remove('popup_is-active');
+};
+
 function openPopup(modalWindowEdit) {
   document.addEventListener('keydown', handleEscUp);
   modalWindowEdit.classList.add('popup_is-active');
-};
-
-function closePopup(modalWindowEdit) {
-  document.removeEventListener('keydown', handleEscUp);
-  modalWindowEdit.classList.remove('popup_is-active');
 };
 
 profileEditingButton.addEventListener('click', function () {
@@ -69,18 +78,6 @@ profileEditingButton.addEventListener('click', function () {
 
 imageAddButton.addEventListener('click', () => {
   openPopup(modalWindowAdd);
-});
-
-cardCloseBtn.addEventListener('click', () => {
-  closePopup(modalWindowEdit);
-});
-
-popupCloseBtn.addEventListener('click', () => {
-  closePopup(modalWindowAdd);
-});
-
-imageCloseBtn.addEventListener('click', () => {
-  closePopup(modalWindowImage);
 });
 
 function formSubmitHandler(evt) {
@@ -141,3 +138,4 @@ formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', ImageAddFormSubmitHandler);
 
 render();
+
