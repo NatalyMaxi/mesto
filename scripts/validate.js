@@ -39,7 +39,7 @@ const setEventListeners = (formElement) => {
    inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
          checkInputValidity(formElement, inputElement);
-         toggleButtonState(inputList, buttonElement);
+         toggleButton(inputList, buttonElement);
       });
    });
 };
@@ -63,9 +63,6 @@ function toggleButton(formElement) {
       } 
    })
 }
-
-
-
 
 
 
