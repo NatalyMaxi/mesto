@@ -132,6 +132,7 @@ function ImageAddFormSubmitHandler(evt) {
   listContainer.prepend(element);
   closePopup(modalWindowAdd);
   formElementAdd.reset();
+  // disabledButton(buttonElement);
 };
 
 formElement.addEventListener('submit', formSubmitHandler);
