@@ -36,6 +36,10 @@ const enableValidation = () => {
 
 const setEventListeners = (formElement) => {
    const inputList = Array.from(formElement.querySelectorAll('.form__item'));
+   const buttonElement = formElement.querySelector('.form__button');
+   
+   toggleButton(inputList, buttonElement);
+
    inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
          checkInputValidity(formElement, inputElement);
@@ -51,20 +55,15 @@ const hasInvalidInput = (inputList) => {
    });
 }
 
-function toggleButton(formElement) {
-   const buttonList = Array.from(formElement.querySelectorAll('.form__button'));
-   buttonList.forEach((buttonElement) => {
+function toggleButton(inputList, buttonElement) {
       if (hasInvalidInput(inputList)) {
-         buttonElement.setAttribute('disabled')
-         buttonElement.classList.add('form__button_type_disabled');
+         buttonElement.classList.add('form__button_type_disabled')
+         buttonElement.setAttribute('disabled', 'disabled');
       } else {
+         buttonElement.classList.remove('form__button_type_disabled');
          buttonElement.removeAttribute('disabled');
-         buttonElement.classList.remove('form__button_type_disabled')
       } 
-   })
 }
-
-
 
 enableValidation({
    formSelector: '.form',
