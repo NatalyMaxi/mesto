@@ -61,12 +61,12 @@ const handleEscUp = (evt) => {
 }
 
 function closePopup(popup) {
-  document.removeEventListener('keydown', handleEscUp);
+  document.removeEventListener('keyup', handleEscUp);
   popup.classList.remove('popup_is-active');
 };
 
 function openPopup(modalWindowEdit) {
-  document.addEventListener('keydown', handleEscUp);
+  document.addEventListener('keyup', handleEscUp);
   modalWindowEdit.classList.add('popup_is-active');
 };
 
