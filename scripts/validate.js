@@ -5,7 +5,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
    errorElement.classList.add('form__error_visible');
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement,) => {
    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
    inputElement.classList.remove('form__item_type_error');
    errorElement.classList.remove('form__error_visible');
@@ -20,27 +20,38 @@ const checkInputValidity = (formElement, inputElement) => {
    }
 };
 
-const enableValidation = () => {
-   const formList = Array.from(document.querySelectorAll('.form'));
-   formList.forEach((formElement) => {
-      formElement.addEventListener('submit', (evt) => {
-         evt.preventDefault();
-      });
-      setEventListeners(formElement);
-   });
-};
+const setEventListeners = (formElement, config) => {
+   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
+   const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
-const setEventListeners = (formElement) => {
-   const inputList = Array.from(formElement.querySelectorAll('.form__item'));
-   const buttonElement = formElement.querySelector('.form__button');
-
-   toggleButton(inputList, buttonElement);
+   toggleButton(inputList, buttonElement, config);
 
    inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
          checkInputValidity(formElement, inputElement);
-         toggleButton(inputList, buttonElement);
+         toggleButton(inputList, buttonElement, config);
       });
+   });
+};
+
+// функция убирает костыль, по поводу добавления пустой карточки при повторном открытии, 
+// псоле добавления карточки при первом открытии.
+
+function disabledButton(formElement, config) {
+   const buttonElement = formElement.querySelector(config.submitButtonSelector)
+   buttonElement.classList.add(config.inactiveButtonClass)
+   buttonElement.setAttribute('disabled', 'disabled');
+}
+
+const enableValidation = (config) => {
+   const formList = Array.from(document.querySelectorAll(config.formSelector));
+   formList.forEach((formElement) => {
+      formElement.addEventListener('submit', (evt) => {
+         evt.preventDefault();
+         //блокирование кнопки после дорбавления карточки и новом открытии попап
+         disabledButton(formElement, config);
+      });
+      setEventListeners(formElement, config);
    });
 };
 
@@ -50,12 +61,12 @@ const hasInvalidInput = (inputList) => {
    });
 }
 
-function toggleButton(inputList, buttonElement) {
+function toggleButton(inputList, buttonElement, config) {
    if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add('form__button_type_disabled')
+      buttonElement.classList.add(config.inactiveButtonClass)
       buttonElement.setAttribute('disabled', 'disabled');
    } else {
-      buttonElement.classList.remove('form__button_type_disabled');
+      buttonElement.classList.remove(config.inactiveButtonClass);
       buttonElement.removeAttribute('disabled');
    }
 }
@@ -69,7 +80,4 @@ enableValidation({
    errorClass: 'form__error_visible'
 });
 
-// function disabledButton(buttonElement) {
-//    buttonElement.classList.add('form__button_type_disabled')
-//    buttonElement.setAttribute('disabled', 'disabled');  
-// }
+
