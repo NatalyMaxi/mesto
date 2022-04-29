@@ -34,8 +34,8 @@ const formElementAdd = document.querySelector('[name="add-images"]')
 const nameInput = formElement.querySelector('[name="full-name"]');
 const jobinput = formElement.querySelector('[name="about-me"]');
 
-const regionInput = formElementAdd.querySelector('[name="region"]').value;
-const linkinput = formElementAdd.querySelector('[name="link"]').value;
+const regionInput = formElementAdd.querySelector('[name="region"]');
+const linkinput = formElementAdd.querySelector('[name="link"]');
 
 const popups = document.querySelectorAll('.popup');
 const modalWindowEdit = document.querySelector('.popup_type_edit');
@@ -129,7 +129,7 @@ function getElement(item) {
 
 function ImageAddFormSubmitHandler(evt) {
   evt.preventDefault();
-  const element = getElement({ name: regionInput, link: linkinput });
+  const element = getElement({ name: regionInput.value, link: linkinput.value });
   listContainer.prepend(element);
   closePopup(modalWindowAdd);
   formElementAdd.reset();
