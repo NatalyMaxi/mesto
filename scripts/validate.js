@@ -47,7 +47,6 @@ const enableValidation = (config) => {
    const formList = Array.from(document.querySelectorAll(config.formSelector));
    formList.forEach((formElement) => {
       formElement.addEventListener('submit', (evt) => {
-         evt.preventDefault();
          //блокирование кнопки после дорбавления карточки и новом открытии попап
          disabledButton(formElement, config);
       });
