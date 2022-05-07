@@ -56,7 +56,6 @@ popups.forEach((popup) => {
 })
 
 const handleEscUp = (evt) => {
-  evt.preventDefault()
   if (evt.key === 'Escape') {
     const activePopup = document.querySelector('.popup_is-active')
     closePopup(activePopup);
