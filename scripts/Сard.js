@@ -1,4 +1,5 @@
-
+import { cardImage, cardCaption, modalWindowImage, modalWindowImageCloseBtn } from './constants.js';
+import { handleEscUp } from "./index.js";
 
 export class Card {
    _title;
