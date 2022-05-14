@@ -39,35 +39,7 @@ const cardImage = modalWindowImage.querySelector('.popup__img');
 const cardCaption = modalWindowImage.querySelector('.popup__caption');
 
 // const template = document.querySelector('.template');
-// const popups = document.querySelectorAll('.popup');
-
-export {
-   modalWindowEdit, profileEditingButton, modalWindowEditCloseBtn, formEditProfile, nameInput, jobInput, profileTitle,
-   profileSubtitle, linkInput, regionInput, cardsContainer, formAddNewCard, modalWindowAddNewCardCloseBtn,
-   modalWindowAddNewCardOpenBtn, modalWindowImageCloseBtn, modalWindowImage, cardImage, cardCaption, initialCards
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const popups = document.querySelectorAll('.popup');
 
 
 
@@ -98,3 +70,9 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
    }
 ];
+
+export {
+   modalWindowEdit, modalWindowAdd, profileEditingButton, modalWindowEditCloseBtn, formEditProfile, nameInput, jobInput, profileTitle,
+   profileSubtitle, linkInput, regionInput, cardsContainer, formAddNewCard, modalWindowAddNewCardCloseBtn,
+   modalWindowAddNewCardOpenBtn, modalWindowImageCloseBtn, modalWindowImage, cardImage, cardCaption, popups, initialCards
+};

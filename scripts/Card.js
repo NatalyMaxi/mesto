@@ -33,6 +33,7 @@ export class Card {
       this._setEventListeners();
       this._element.querySelector('.list__title').textContent = this._title;
       this._element.querySelector('.list__image').src = this._image;
+      // this._element.querySelector('.list__image').alt = this._title;
 
       // Вернём элемент наружу
       return this._element;
@@ -75,8 +76,8 @@ export class Card {
 
    // метод слушателя по картинке для просмотра изображения
    _handleOpenPopup() {
-      cardImage.src = this._link;
-      cardCaption.textContent = this._name;
+      cardImage.src = this._image;
+      cardCaption.textContent = this._title;
       modalWindowImage.classList.add('popup_is-active');
       document.addEventListener('keyup', handleEscUp);
    }
