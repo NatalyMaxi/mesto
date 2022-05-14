@@ -42,10 +42,14 @@ const modalWindowEdit = document.querySelector('.popup_type_edit');
 const modalWindowAdd = document.querySelector('.popup_type_add');
 const modalWindowImage = document.querySelector('.popup_type_image');
 
-const listContainer = document.querySelector('.list');
+const cardsContainer = document.querySelector('.list');
 const template = document.querySelector('.template');
 const cardImage = modalWindowImage.querySelector('.popup__img');
 const cardCaption = modalWindowImage.querySelector('.popup__caption');
+
+
+// находим кнопку закрытия попапа просмотра изображений
+const modalWindowImageCloseBtn = modalWindowImage.querySelector('.popup__close')
 
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
@@ -91,7 +95,7 @@ function formSubmitHandler(evt) {
 
 function render() {
   const html = initialCards.map(getElement);
-  listContainer.append(...html);
+  cardsContainer.append(...html);
 };
 
 function getElement(item) {
@@ -129,10 +133,21 @@ function getElement(item) {
 function ImageAddFormSubmitHandler(evt) {
   evt.preventDefault();
   const element = getElement({ name: regionInput.value, link: linkinput.value });
-  listContainer.prepend(element);
+  cardsContainer.prepend(element);
   closePopup(modalWindowAdd);
   formElementAdd.reset();
 };
+
+// функция загрузки карточек из массива
+// const renderInitialCards = (array) => {
+//   array.forEach((item) => {
+//     const card = new Card(item.title, item.image, '.template');
+//     const cardElement = card.generateCard();
+
+//     cardsContainer.prepend(cardElement);
+//   })
+
+
 
 formElement.addEventListener('submit', formSubmitHandler);
 formElementAdd.addEventListener('submit', ImageAddFormSubmitHandler);
