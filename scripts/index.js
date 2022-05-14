@@ -1,9 +1,8 @@
 import {
-  modalWindowEdit, modalWindowAdd, profileEditingButton, modalWindowEditCloseBtn, formEditProfile, nameInput, jobInput, profileTitle,  profileSubtitle, linkInput, regionInput, cardsContainer, formAddNewCard, modalWindowAddNewCardCloseBtn,
-  modalWindowAddNewCardOpenBtn, modalWindowImage, popups ,initialCards
+  modalWindowEdit, modalWindowAdd, profileEditingButton, formEditProfile, nameInput, jobInput, profileTitle,  profileSubtitle, linkInput, regionInput, cardsContainer, formAddNewCard, modalWindowAddNewCardOpenBtn, popups, config, initialCards
 } from './constants.js';
 import { Card } from './Card.js';
-
+import { FormValidator } from './FormValidator';
 
 // // функция открытия попапа
 // function openPopup(popup) {
@@ -111,6 +110,13 @@ formAddNewCard.addEventListener('submit', (evt) => {
 // автоматическая загрузка карточек на страницу
 renderInitialCards(initialCards);
 
+// валидация формы редактирования профиля
+const formEditProfileValidator = new FormValidator(config, formEditProfile);
+formEditProfileValidator.enableValidation();
+
+// валидация формы добавления новой карточки
+const formAddNewCardValidator = new FormValidator(config, formAddNewCard);
+formAddNewCardValidator.enableValidation();
 
 export { handleEscUp };
   

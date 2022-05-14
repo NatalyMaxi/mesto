@@ -42,7 +42,14 @@ const cardCaption = modalWindowImage.querySelector('.popup__caption');
 const popups = document.querySelectorAll('.popup');
 
 
-
+const config = {
+   formSelector: '.form',
+   inputSelector: '.form__item',
+   submitButtonSelector: '.form__button',
+   inactiveButtonClass: 'form__button_type_disabled',
+   inputErrorClass: 'form__item_type_error',
+   errorClass: 'form__error_visible'
+};
 
 const initialCards = [
    {
@@ -74,5 +81,5 @@ const initialCards = [
 export {
    modalWindowEdit, modalWindowAdd, profileEditingButton, modalWindowEditCloseBtn, formEditProfile, nameInput, jobInput, profileTitle,
    profileSubtitle, linkInput, regionInput, cardsContainer, formAddNewCard, modalWindowAddNewCardCloseBtn,
-   modalWindowAddNewCardOpenBtn, modalWindowImageCloseBtn, modalWindowImage, cardImage, cardCaption, popups, initialCards
+   modalWindowAddNewCardOpenBtn, modalWindowImageCloseBtn, modalWindowImage, cardImage, cardCaption, popups, config, initialCards
 };
