@@ -51,7 +51,7 @@ const formAddNewCard = modalWindowAdd.querySelector('[name="add-images"]');
 const regionInput = formAddNewCard.querySelector('[name="region"]');
 const linkInput = formAddNewCard.querySelector('[name="link"]');
 
-
+const buttonElement = formAddNewCard.querySelector('.form__submit');
 // попап просмотра изображения
 const modalWindowImage = document.querySelector('.popup_type_image');
 const cardImage = modalWindowImage.querySelector('.popup__img');
@@ -142,6 +142,7 @@ formAddNewCard.addEventListener('submit', (evt) => {
   regionInput.value = '';
   linkInput.value = '';
   closePopup(modalWindowAdd);
+  formAddNewCard.reset();
 });
 
 // автоматическая загрузка карточек на страницу
