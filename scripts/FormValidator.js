@@ -8,27 +8,27 @@ export default class FormValidator {
    }
 
    // добавление класса с ошибкой
-   _showInputError(formElement, inputElement, errorMessage, config) {
+   _showInputError(inputElement, errorMessage) {
       const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
       inputElement.classList.add(this._config.inputErrorClass);
       errorElement.textContent = errorMessage;
-      errorElement.classList.add(this._errorClass);
+      errorElement.classList.add(this._config.errorClass);
    };
 
    // удаление класса с ошибкой
-   _hideInputError(formElement, inputElement, config) {
+   _hideInputError(inputElement) {
       const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
       inputElement.classList.remove(this._config.inputErrorClass);
-      errorElement.classList.remove(this._errorClass);
+      errorElement.classList.remove(this._config.errorClass);
       errorElement.textContent = '';
    };
 
 //проверка валидности формы
-   _checkInputValidity(formElement, inputElement, config) {
+   _checkInputValidity(inputElement) {
       if (!inputElement.validity.valid) {
-         this._showInputError(this._formElement, inputElement, inputElement.validationMessage, config);
+         this._showInputError(inputElement, inputElement.validationMessage);
       } else {
-         this._hideInputError(this._formElement, inputElement, config);
+         this._hideInputError(inputElement);
       }
    };
    // проверка валидности инпута
@@ -38,23 +38,23 @@ export default class FormValidator {
       });
    };
   
-   _toggleButtonState(inputList, buttonElement, config) {
+   _toggleButtonState() {
       if (this._hasInvalidInput(inputList)) {
-         buttonElement.classList.add(this._config.inactiveButtonClass)
-         buttonElement.setAttribute('disabled', 'disabled');
+         this._buttonElement.classList.add(this._config.inactiveButtonClass)
+         this._buttonElement.setAttribute('disabled', 'disabled');
       } else {
-         buttonElement.classList.remove(this._config.inactiveButtonClass);
-         buttonElement.removeAttribute('disabled');
+         this._buttonElement.classList.remove(this._config.inactiveButtonClass);
+         this._buttonElement.removeAttribute('disabled');
       }
    };
  
    // метод с хэндерами
    _setEventListeners() {
-      this._toggleButtonState(this._inputList, this._buttonElement);
+      this._toggleButtonState();
       this._inputList.forEach((inputElement) => {
          inputElement.addEventListener('input', () => {
-            this._checkInputValidity(this._formElement, inputElement);
-            this._toggleButtonState(this._inputList, this._buttonElement);
+            this._checkInputValidity(inputElement);
+            this._toggleButtonState();
          });
       });
       this._formElement.addEventListener('submit', (event) => {
