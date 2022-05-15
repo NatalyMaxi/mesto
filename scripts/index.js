@@ -2,7 +2,7 @@ import {
   modalWindowEdit, modalWindowAdd, profileEditingButton, formEditProfile, nameInput, jobInput, profileTitle,  profileSubtitle, linkInput, regionInput, cardsContainer, formAddNewCard, modalWindowAddNewCardOpenBtn, popups, config, initialCards
 } from './constants.js';
 import { Card } from './Card.js';
-import { FormValidator } from './FormValidator';
+import { FormValidator } from './FormValidator.js';
 
 // // функция открытия попапа
 // function openPopup(popup) {
