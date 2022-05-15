@@ -1,124 +1,79 @@
-export default class FormValidator {
-  
+'use strict'
+
+export class FormValidator {
+
    constructor(config, formElement) {
-      this._config = config;
+      // this._config = config;
       this._formElement = formElement;
-      this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-      this._buttonElement = this._formElement.querySelector(this._config.submitButtonSelector);
+
+      this._formSelector = config.formSelector;
+      this._inputSelector = config.inputSelector;
+      this._submitButtonSelector = config.submitButtonSelector;
+      this._inputErrorClass = config.inputErrorClass;
+      this._inactiveButtonClass = config.inactiveButtonClass;
+      this._errorClass = config.errorClass;
+
+      this._inputElements = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+      this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
    }
 
-   // добавление класса с ошибкой
    _showInputError(inputElement, errorMessage) {
-      const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-      inputElement.classList.add(this._config.inputErrorClass);
+      const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+      inputElement.classList.add(this._inputErrorClass);
       errorElement.textContent = errorMessage;
-      errorElement.classList.add(this._config.errorClass);
-   };
+      errorElement.classList.add(this._errorClass);
+   }
 
-   // удаление класса с ошибкой
    _hideInputError(inputElement) {
-      const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
-      inputElement.classList.remove(this._config.inputErrorClass);
-      errorElement.classList.remove(this._config.errorClass);
+      const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+      inputElement.classList.remove(this._inputErrorClass);
+      errorElement.classList.remove(this._errorClass);
       errorElement.textContent = '';
-   };
+   }
 
-//проверка валидности формы
    _checkInputValidity(inputElement) {
-      if (!inputElement.validity.valid) {
-         this._showInputError(inputElement, inputElement.validationMessage);
-      } else {
+      if (inputElement.validity.valid) {
          this._hideInputError(inputElement);
-      }
-   };
-   // проверка валидности инпута
-   _hasInvalidInput() {
-      return this._inputList.some((inputElement) => {
-         return !inputElement.validity.valid;
-      });
-   };
-  
-   _toggleButtonState() {
-      if (this._hasInvalidInput()) {
-         this._buttonElement.classList.add(this._config.inactiveButtonClass)
-         this._buttonElement.setAttribute('disabled', 'disabled');
       } else {
-         this._buttonElement.classList.remove(this._config.inactiveButtonClass);
-         this._buttonElement.removeAttribute('disabled');
+         this._showInputError(inputElement, inputElement.validationMessage);
       }
-   };
- 
-   // метод с хэндерами
+   }
+
    _setEventListeners() {
-      this._toggleButtonState();
-      this._inputList.forEach((inputElement) => {
+      this._inputElements.forEach(inputElement => {
          inputElement.addEventListener('input', () => {
             this._checkInputValidity(inputElement);
             this._toggleButtonState();
          });
       });
-      this._formElement.addEventListener('submit', (event) => {
-         event.preventDefault();
-      })
-   };
-   // валидация формы
+      this._toggleButtonState();
+   }
+
+   _toggleButtonState() {
+      if (this._hasInvalidInput()) {
+         this.disableButtonState();
+      } else {
+         this._enableButtonState();
+      }
+   }
+
+   disableButtonState() {
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.setAttribute('disabled', 'disabled');
+   }
+
+   _enableButtonState() {
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.removeAttribute('disabled');
+   }
+
+   _hasInvalidInput() {
+      return this._inputElements.some(inputElement => inputElement.validity.valid === false);
+   }
+
    enableValidation() {
       this._setEventListeners();
-   };
+   }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const setEventListeners = (formElement, config) => {
-//    const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
-//    const buttonElement = formElement.querySelector(config.submitButtonSelector);
-
-//    toggleButton(inputList, buttonElement, config);
-
-//    inputList.forEach((inputElement) => {
-//       inputElement.addEventListener('input', function () {
-//          checkInputValidity(formElement, inputElement, config);
-//          toggleButton(inputList, buttonElement, config);
-//       });
-//    });
-// };
-
-// функция убирает костыль, по поводу добавления пустой карточки при повторном открытии, 
-// псоле добавления карточки при первом открытии.
-
-// function disabledButton(formElement, config) {
-//    const buttonElement = formElement.querySelector(config.submitButtonSelector)
-//    buttonElement.classList.add(config.inactiveButtonClass)
-//    buttonElement.setAttribute('disabled', 'disabled');
-// }
-
-// const enableValidation = (config) => {
-//    const formList = Array.from(document.querySelectorAll(config.formSelector));
-//    formList.forEach((formElement) => {
-//       formElement.addEventListener('submit', (evt) => {
-//          //блокирование кнопки после дорбавления карточки и новом открытии попап
-//          disabledButton(formElement, config);
-//       });
-//       setEventListeners(formElement, config);
-//    });
-// };
-
-
-
-
-
 

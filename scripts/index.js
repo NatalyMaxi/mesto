@@ -1,30 +1,87 @@
-import {
-  modalWindowEdit, modalWindowAdd, profileEditingButton, formEditProfile, nameInput, jobInput, profileTitle,  profileSubtitle, linkInput, regionInput, cardsContainer, formAddNewCard, modalWindowAddNewCardOpenBtn, popups, config, initialCards
-} from './constants.js';
+'use strict'
+
 import { Card } from './Card.js';
-import FormValidator from './FormValidator.js';
+import { FormValidator } from './FormValidator.js';
 
-// // функция открытия попапа
-// function openPopup(popup) {
-//   document.addEventListener('keyup', handleEscUp);
-//   popup.classList.add('popup_is-active');
-// };
+//массив с карточками
 
-// // функция закрытия попапа
-// function closePopup(popup) {
-//   document.removeEventListener('keyup', handleEscUp);
-//   popup.classList.remove('popup_is-active');
-// };
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
-// // обработчик клика по кнопке Escape
-// const handleEscUp = (evt) => {
-//   if (evt.key === 'Escape') {
-//     const activePopup = document.querySelector('.popup_is-active')
-//     closePopup(activePopup);
-//   }
-// }
+
+// попап редактирования профиля
+const modalWindowEdit = document.querySelector('.popup_type_edit');
+const profileEditingButton = document.querySelector('.profile__btn');
+const formEditProfile = modalWindowEdit.querySelector('[name="subscribeForm"]');
+const nameInput = formEditProfile.querySelector('[name="full-name"]');
+const jobInput = formEditProfile.querySelector('[name="about-me"]');
+// выбираем куда будут импортироваться данные из формы
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
 
 
+// попап добавления карточки
+const modalWindowAdd = document.querySelector('.popup_type_add');;
+const modalWindowAddNewCardOpenBtn = document.querySelector('.profile__button');
+const formAddNewCard = modalWindowAdd.querySelector('[name="add-images"]');
+const regionInput = formAddNewCard.querySelector('[name="region"]');
+const linkInput = formAddNewCard.querySelector('[name="link"]');
+
+
+// попап просмотра изображения
+const modalWindowImage = document.querySelector('.popup_type_image');
+const cardImage = modalWindowImage.querySelector('.popup__img');
+const cardCaption = modalWindowImage.querySelector('.popup__caption');
+
+//попапы
+const popups = document.querySelectorAll('.popup');
+
+// находим контейнер для карточек
+const cardsContainer = document.querySelector('.list');
+
+const config = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_type_disabled',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__error_visible'
+};
+
+
+function openPopup(modalWindowEdit) {
+  modalWindowEdit.classList.add('popup_is-active');
+  document.addEventListener('keyup', handleEscUp);
+};
+
+function closePopup(popup) {
+  document.removeEventListener('keyup', handleEscUp);
+  popup.classList.remove('popup_is-active');
+};
 
 const handleEscUp = (evt) => {
   if (evt.key === 'Escape') {
@@ -33,18 +90,7 @@ const handleEscUp = (evt) => {
   }
 }
 
-function closePopup(popup) {
-  document.removeEventListener('keyup', handleEscUp);
-  popup.classList.remove('popup_is-active');
-};
-
-function openPopup(modalWindowEdit) {
-  document.addEventListener('keyup', handleEscUp);
-  modalWindowEdit.classList.add('popup_is-active');
-};
-
-
-// функция закрытия попапа кликом на оверлей
+// функция закрытия попапа кликом на оверлей и на крестик
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
@@ -76,18 +122,13 @@ function formSubmitHandler(evt) {
 // функция загрузки карточек из массива
 const renderInitialCards = (array) => {
   array.forEach((item) => {
-    const card = new Card(item.name, item.link, '.template');
-    const cardElement = card.generateCard();
-
-    cardsContainer.append(cardElement);
-      closePopup(modalWindowAdd);
-  formAddNewCard.reset()
+    addCard(item.name, item.link);
   })
 }
 
 // функция добавления карточки на страницу из формы
 const addCard = (title, image) => {
-  const card = new Card(title, image, '.template').generateCard();
+  const card = new Card(title, image, '.template', openPopup, closePopup).generateCard();
   cardsContainer.prepend(card);
 };
 
@@ -101,11 +142,7 @@ formAddNewCard.addEventListener('submit', (evt) => {
   regionInput.value = '';
   linkInput.value = '';
   closePopup(modalWindowAdd);
-  // находим кнопку submit и деактивируем ее после создания карточки
-  const buttonElement = formAddNewCard.querySelector('.form__button');
-  buttonElement.setAttribute('disabled', 'disabled');
 });
-
 
 // автоматическая загрузка карточек на страницу
 renderInitialCards(initialCards);
@@ -118,68 +155,5 @@ formEditProfileValidator.enableValidation();
 const formAddNewCardValidator = new FormValidator(config, formAddNewCard);
 formAddNewCardValidator.enableValidation();
 
-export { handleEscUp };
-  
+export { cardImage, cardCaption, modalWindowImage };
 
-
-  
-  
-
-  
-
-  
-
-// function render() {
-//   const html = initialCards.map(getElement);
-//   cardsContainer.append(...html);
-// };
-
-// function getElement(item) {
-//   const getElementTemplate = template.content.cloneNode(true);
-//   const name = getElementTemplate.querySelector('.list__title');
-//   const link = getElementTemplate.querySelector('.list__image');
-//   const cardRemoveBtn = getElementTemplate.querySelector('.list__btn');
-//   const ImageLikeBtn = getElementTemplate.querySelector('.list__toggle');
-
-//   name.textContent = item.name;
-//   link.src = item.link;
-//   link.alt = item.name;
-
-//   function removeElement(evt) {
-//     const element = evt.target.closest('.list__items');
-//     element.remove();
-//   };
-
-//   cardRemoveBtn.addEventListener('click', removeElement);
-
-//   ImageLikeBtn.addEventListener('click', function (evt) {
-//     evt.target.classList.toggle('list__toggle_active')
-//   });
-
-//   link.addEventListener('click', () => {
-//     cardImage.src = item.link;
-//     cardCaption.alt = item.name;
-//     cardCaption.textContent = item.name;
-//     openPopup(modalWindowImage);
-//   });
-
-//   return getElementTemplate;
-// };
-
-
-
-
-
-
-// formElement.addEventListener('submit', formSubmitHandler);
-// formAddNewCard.addEventListener('submit', renderInitialCards);
-
-// render();
-
-// function ImageAddFormSubmitHandler(evt) {
-//   evt.preventDefault();
-//   const element = getElement({ name: regionInput.value, link: linkinput.value });
-//   cardsContainer.prepend(element);
-//   closePopup(modalWindowAdd);
-//   formElementAdd.reset();
-// };

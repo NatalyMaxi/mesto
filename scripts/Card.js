@@ -1,16 +1,16 @@
-import { cardImage, cardCaption, modalWindowImage, modalWindowImageCloseBtn } from './constants.js';
-import { handleEscUp } from "./index.js";
+'use strict'
+
+import { cardImage, cardCaption, modalWindowImage} from './index.js';
 
 export class Card {
-   _title;
-   _image;
-   _cardSelector;
-   _element;
 
-   constructor(title, image, cardSelector) {
+   constructor(title, image, cardSelector, openPopup, closePopup) {
+      this._container = document.querySelector(cardSelector);
       this._title = title;
       this._image = image;
       this._cardSelector = cardSelector;
+      this._openPopup = openPopup;
+      this._closePopup = closePopup;
    }
 
    //метод, который возвращает разметку
@@ -27,17 +27,36 @@ export class Card {
       return cardElement;
    }
 
-   //метод создания карточки 
-   generateCard() {
-      this._element = this._getTemplate();
-      this._setEventListeners();
-      this._element.querySelector('.list__title').textContent = this._title;
-      this._element.querySelector('.list__image').src = this._image;
-      // this._element.querySelector('.list__image').alt = this._title;
-
-      // Вернём элемент наружу
-      return this._element;
+   // метод слушателя по кнопке - "лайк"
+   _handleLikeCard() {
+      const likeBtn = this._element.querySelector('.list__toggle');
+      likeBtn.classList.toggle('list__toggle_active');
    }
+
+   // метод слушателя по кнопке - "удалить"
+   _handleDeleteCard() {
+      this._element.remove();
+      this._element = null;
+   }
+
+   // метод слушателя по картинке для просмотра изображения
+   _handleOpenPopup() {
+      cardImage.src = this._image;
+      cardImage.alt = this._title;
+      cardCaption.textContent = this._title;
+      this._openPopup(modalWindowImage);
+   }
+
+   // метод слушателя закрытия попапа просмотра изображения
+   _handleClosePopup() {
+      cardImage.src = '';
+      cardImage.alt = '';
+      cardCaption.textContent = '';
+      this._closePopup(modalWindowImage);
+   }
+
+
+
 
    //метод добавления всех обработчиков
    _setEventListeners() {
@@ -45,11 +64,6 @@ export class Card {
       // открытие попапа просмотра изображения кликом по изображению
       this._element.querySelector('.list__image').addEventListener('click', () => {
          this._handleOpenPopup();
-      })
-
-      // закрытие попапа просмотра изображения кликом на кнопку закрытия
-      modalWindowImageCloseBtn.addEventListener('click', () => {
-         this._handleClosePopup();
       })
 
       // слушатель кнопки удаления карточки
@@ -63,30 +77,17 @@ export class Card {
       });
    }
 
-   // метод слушателя по кнопке - "удалить"
-   _handleDeleteCard() {
-      this._element.remove();
-   }
 
-   // метод слушателя по кнопке - "лайк"
-   _handleLikeCard() {
-      const likeBtn = this._element.querySelector('.list__toggle');
-      likeBtn.classList.toggle('list__toggle_active');
-   }
+   //метод создания карточки 
+   generateCard() {
+      this._element = this._getTemplate();
+      this._setEventListeners();
 
-   // метод слушателя по картинке для просмотра изображения
-   _handleOpenPopup() {
-      cardImage.src = this._image;
-      cardCaption.textContent = this._title;
-      modalWindowImage.classList.add('popup_is-active');
-      document.addEventListener('keyup', handleEscUp);
-   }
+      this._element.querySelector('.list__title').textContent = this._title;
+      this._element.querySelector('.list__image').src = this._image;
+      this._element.querySelector('.list__image').alt = this._title;
 
-   // метод слушателя закрытия попапа просмотра изображения
-   _handleClosePopup() {
-      cardImage.src = '';
-      cardCaption.textContent = '';
-      modalWindowImage.classList.remove('popup_is-active');
-      document.removeEventListener('keyup', handleEscUp);
-   }
+      // Вернём элемент наружу
+      return this._element;
+   } 
 }
