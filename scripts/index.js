@@ -72,7 +72,6 @@ const config = {
   errorClass: 'form__error_visible'
 };
 
-
 function openPopup(modalWindowEdit) {
   modalWindowEdit.classList.add('popup_is-active');
   document.addEventListener('keyup', handleEscUp);
@@ -103,11 +102,13 @@ popups.forEach((popup) => {
 profileEditingButton.addEventListener('click', function () {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
+  formEditProfileValidator.resetValidation();
   openPopup(modalWindowEdit);
 });
 
 // слушатель кнопки открытия попапа добавления новой карточки
 modalWindowAddNewCardOpenBtn.addEventListener('click', () => {
+  formAddNewCardValidator.resetValidation();
   openPopup(modalWindowAdd);
 });
 
@@ -126,7 +127,6 @@ const renderInitialCards = (array) => {
   })
 }
 
-
 function createCard(title, image) {
   const card = new Card(title, image, '.template', openPopup, closePopup);
   const cardElement = card.generateCard();
@@ -137,8 +137,6 @@ const addCard = (title, image) => {
   const card = createCard(title, image)
   cardsContainer.prepend(card);
 };
-
-
 
 // Обработчик кнопки Submit попапа редактирования профиля
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);

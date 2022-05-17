@@ -3,16 +3,14 @@
 export class FormValidator {
 
    constructor(config, formElement) {
-      // this._config = config;
-      this._formElement = formElement;
 
+      this._formElement = formElement;
       this._formSelector = config.formSelector;
       this._inputSelector = config.inputSelector;
       this._submitButtonSelector = config.submitButtonSelector;
       this._inputErrorClass = config.inputErrorClass;
       this._inactiveButtonClass = config.inactiveButtonClass;
       this._errorClass = config.errorClass;
-
       this._inputElements = Array.from(this._formElement.querySelectorAll(this._inputSelector));
       this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
    }
@@ -47,6 +45,13 @@ export class FormValidator {
          });
       });
       this._toggleButtonState();
+   }
+
+   resetValidation() {
+      this._toggleButtonState();
+      this._inputElements.forEach((inputElement) => {
+         this._hideInputError(inputElement)
+      });
    }
 
    _toggleButtonState() {
