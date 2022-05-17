@@ -47,17 +47,6 @@ export class Card {
       this._openPopup(modalWindowImage);
    }
 
-   // метод слушателя закрытия попапа просмотра изображения
-   _handleClosePopup() {
-      cardImage.src = '';
-      cardImage.alt = '';
-      cardCaption.textContent = '';
-      this._closePopup(modalWindowImage);
-   }
-
-
-
-
    //метод добавления всех обработчиков
    _setEventListeners() {
 
