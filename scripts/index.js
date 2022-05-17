@@ -112,7 +112,7 @@ modalWindowAddNewCardOpenBtn.addEventListener('click', () => {
 });
 
 //функция редактирования профиля
-function formSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
@@ -132,15 +132,14 @@ const addCard = (title, image) => {
   cardsContainer.prepend(card);
 };
 
+
 // Обработчик кнопки Submit попапа редактирования профиля
-formEditProfile.addEventListener('submit', formSubmitHandler);
+formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
 // слушатель Submit формы создания карточки
 formAddNewCard.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  addCard(regionInput.value, linkInput.value);
-  regionInput.value = '';
-  linkInput.value = '';
+  addCard(regionInput.value, linkInput.value)
   closePopup(modalWindowAdd);
   formAddNewCard.reset();
 });
@@ -155,6 +154,7 @@ formEditProfileValidator.enableValidation();
 // валидация формы добавления новой карточки
 const formAddNewCardValidator = new FormValidator(config, formAddNewCard);
 formAddNewCardValidator.enableValidation();
+
 
 export { cardImage, cardCaption, modalWindowImage };
 

@@ -5,7 +5,7 @@ import { cardImage, cardCaption, modalWindowImage} from './index.js';
 export class Card {
 
    constructor(title, image, cardSelector, openPopup, closePopup) {
-      this._container = document.querySelector(cardSelector);
+  
       this._title = title;
       this._image = image;
       this._cardSelector = cardSelector;
