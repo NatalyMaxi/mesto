@@ -51,7 +51,7 @@ export class Card {
    _setEventListeners() {
 
       // открытие попапа просмотра изображения кликом по изображению
-      this._element.querySelector('.list__image').addEventListener('click', () => {
+      this._cardImage.addEventListener('click', () => {
          this._handleOpenPopup();
       })
 
@@ -70,11 +70,12 @@ export class Card {
    //метод создания карточки 
    generateCard() {
       this._element = this._getTemplate();
+      this._cardImage = this._element.querySelector('.list__image');
       this._setEventListeners();
 
       this._element.querySelector('.list__title').textContent = this._title;
-      this._element.querySelector('.list__image').src = this._image;
-      this._element.querySelector('.list__image').alt = this._title;
+      this._cardImage.src = this._image;
+      this._cardImage.alt = this._title;
 
       // Вернём элемент наружу
       return this._element;
