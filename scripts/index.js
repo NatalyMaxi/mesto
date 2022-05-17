@@ -126,11 +126,18 @@ const renderInitialCards = (array) => {
   })
 }
 
-// функция добавления карточки на страницу из формы
+
+function createCard(title, image) {
+  const card = new Card(title, image, '.template', openPopup, closePopup);
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
 const addCard = (title, image) => {
-  const card = new Card(title, image, '.template', openPopup, closePopup).generateCard();
+  const card = createCard(title, image)
   cardsContainer.prepend(card);
 };
+
 
 
 // Обработчик кнопки Submit попапа редактирования профиля
