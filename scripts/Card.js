@@ -3,7 +3,6 @@
 import { cardImage, cardCaption, modalWindowImage} from './index.js';
 
 export class Card {
-
    constructor(title, image, cardSelector, openPopup, closePopup) {
   
       this._title = title;
@@ -29,8 +28,7 @@ export class Card {
 
    // метод слушателя по кнопке - "лайк"
    _handleLikeCard() {
-      const likeBtn = this._element.querySelector('.list__toggle');
-      likeBtn.classList.toggle('list__toggle_active');
+      this._likeBtn.classList.toggle('list__toggle_active');
    }
 
    // метод слушателя по кнопке - "удалить"
@@ -49,7 +47,8 @@ export class Card {
 
    //метод добавления всех обработчиков
    _setEventListeners() {
-
+      this._likeBtn = this._element.querySelector('.list__toggle');
+      
       // открытие попапа просмотра изображения кликом по изображению
       this._cardImage.addEventListener('click', () => {
          this._handleOpenPopup();
@@ -61,11 +60,10 @@ export class Card {
       })
 
       // слушатель кнопки лайка
-      this._element.querySelector('.list__toggle').addEventListener('click', () => {
+      this._likeBtn.addEventListener('click', () => {
          this._handleLikeCard();
       });
    }
-
 
    //метод создания карточки 
    generateCard() {
