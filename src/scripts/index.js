@@ -132,7 +132,9 @@ function handleProfileFormSubmit(evt) {
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    cardList.addItem(createCard(item));
+    const card = new Card(item.name, item.link, '.template', openPopup, closePopup);
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
   },
 }, '.list');
 
@@ -156,7 +158,7 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 // слушатель Submit формы создания карточки
 formAddNewCard.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  addCard(regionInput.value, linkInput.value)
+  addItem(regionInput.value, linkInput.value)
   closePopup(modalWindowAdd);
   formAddNewCard.reset();
 });
