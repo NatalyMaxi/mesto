@@ -1,6 +1,6 @@
 'use strict'
 
-import { cardImage, cardCaption, modalWindowImage} from './index.js';
+import { cardImage, cardCaption, modalWindowImage} from '../index.js';
 
 export class Card {
    constructor(title, image, cardSelector, openPopup, closePopup) {
