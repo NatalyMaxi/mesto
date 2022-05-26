@@ -2,6 +2,7 @@
 
 import { Card } from './components/Card.js';
 import { FormValidator } from './components/FormValidator.js';
+import Section from './components/Section.js';
 
 //массив с карточками
 
@@ -121,11 +122,22 @@ function handleProfileFormSubmit(evt) {
 };
 
 // функция загрузки карточек из массива
-const renderInitialCards = (array) => {
-  array.forEach((item) => {
-    addCard(item.name, item.link);
-  })
-}
+// const renderInitialCards = (array) => {
+//   array.forEach((item) => {
+//     addCard(item.name, item.link);
+//   })
+// }
+
+
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cardList.addItem(createCard(item));
+  },
+}, '.list');
+
+cardList.renderItems();
+
 
 function createCard(title, image) {
   const card = new Card(title, image, '.template', openPopup, closePopup);
@@ -133,10 +145,10 @@ function createCard(title, image) {
   return cardElement
 }
 
-const addCard = (title, image) => {
-  const card = createCard(title, image)
-  cardsContainer.prepend(card);
-};
+// const addCard = (title, image) => {
+//   const card = createCard(title, image)
+//   cardsContainer.prepend(card);
+// };
 
 // Обработчик кнопки Submit попапа редактирования профиля
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
@@ -150,7 +162,7 @@ formAddNewCard.addEventListener('submit', (evt) => {
 });
 
 // автоматическая загрузка карточек на страницу
-renderInitialCards(initialCards);
+// renderInitialCards(initialCards);
 
 // валидация формы редактирования профиля
 const formEditProfileValidator = new FormValidator(config, formEditProfile);
