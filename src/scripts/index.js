@@ -3,6 +3,7 @@
 import { Card } from './components/Card.js';
 import { FormValidator } from './components/FormValidator.js';
 import Section from './components/Section.js';
+import Popup from './components/Popup.js';
 
 //массив с карточками
 
@@ -73,44 +74,44 @@ const config = {
   errorClass: 'form__error_visible'
 };
 
-function openPopup(modalWindowEdit) {
-  modalWindowEdit.classList.add('popup_is-active');
-  document.addEventListener('keyup', handleEscUp);
-};
+// function openPopup(modalWindowEdit) {
+//   modalWindowEdit.classList.add('popup_is-active');
+//   document.addEventListener('keyup', handleEscUp);
+// };
 
-function closePopup(popup) {
-  document.removeEventListener('keyup', handleEscUp);
-  popup.classList.remove('popup_is-active');
-};
+// function closePopup(popup) {
+//   document.removeEventListener('keyup', handleEscUp);
+//   popup.classList.remove('popup_is-active');
+// };
 
-const handleEscUp = (evt) => {
-  if (evt.key === 'Escape') {
-    const activePopup = document.querySelector('.popup_is-active')
-    closePopup(activePopup);
-  }
-}
+// const handleEscUp = (evt) => {
+//   if (evt.key === 'Escape') {
+//     const activePopup = document.querySelector('.popup_is-active')
+//     closePopup(activePopup);
+//   }
+// }
 
 // функция закрытия попапа кликом на оверлей и на крестик
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
-      closePopup(popup);
-    }
-  })
-})
+// popups.forEach((popup) => {
+//   popup.addEventListener('click', (evt) => {
+//     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+//       closePopup(popup);
+//     }
+//   })
+// })
 
 //функция открытия попапа профиля и занесения  информации в инпуты
 profileEditingButton.addEventListener('click', function () {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubtitle.textContent;
   formEditProfileValidator.resetValidation();
-  openPopup(modalWindowEdit);
+  modalWindowEdit.open();
 });
 
 // слушатель кнопки открытия попапа добавления новой карточки
 modalWindowAddNewCardOpenBtn.addEventListener('click', () => {
   formAddNewCardValidator.resetValidation();
-  openPopup(modalWindowAdd);
+  modalWindowAdd.open();
 });
 
 //функция редактирования профиля
@@ -118,7 +119,7 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubtitle.textContent = jobInput.value;
-  closePopup(modalWindowEdit);
+  modalWindowEdit.close();
 };
 
 // функция загрузки карточек из массива
@@ -132,7 +133,7 @@ function handleProfileFormSubmit(evt) {
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item.name, item.link, '.template', openPopup, closePopup);
+    const card = new Card(item.name, item.link, '.template', open, close);
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
   },
@@ -142,7 +143,7 @@ cardList.renderItems();
 
 
 function createCard(title, image) {
-  const card = new Card(title, image, '.template', openPopup, closePopup);
+  const card = new Card(title, image, '.template', open, close);
   const cardElement = card.generateCard();
   return cardElement
 }
@@ -159,7 +160,7 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 formAddNewCard.addEventListener('submit', (evt) => {
   evt.preventDefault();
   addItem(regionInput.value, linkInput.value)
-  closePopup(modalWindowAdd);
+  modalWindowAdd.close();
   formAddNewCard.reset();
 });
 
