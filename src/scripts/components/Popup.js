@@ -27,11 +27,11 @@ export default class Popup {
 
    open() {
       this._popup.classList.add('popup_is-active')
-      document.addEventListener('keyup', this._escClose);
+      document.addEventListener('keydown', this._escClose);
    }
 
    close() {
       this._popup.classList.remove('popup_is-active')
-      document.removeEventListener('keyup', this._escClose);
+      document.removeEventListener('keydown', this._escClose);
    }
 }
