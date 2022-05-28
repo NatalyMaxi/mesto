@@ -5,6 +5,7 @@ import FormValidator from './components/FormValidator.js';
 import Section from './components/Section.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
+import UserInfo from './components/UserInfo.js';
 
 //массив с карточками
 
@@ -34,7 +35,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
 
 // попап редактирования профиля
 const modalWindowEdit = document.querySelector('.popup_type_edit');
@@ -67,28 +67,15 @@ const config = {
 const bigImagePopup = new PopupWithImage('.popup_type_image');
 bigImagePopup.setEventListeners();
 
+// function addInfoFormProfile({ username, info }) {
+//   nameInput.value = username;
+//   jobInput.value = info;
+// }
 
-//функция открытия попапа профиля и занесения  информации в инпуты
-profileEditingButton.addEventListener('click', function () {
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileSubtitle.textContent;
-  formEditProfileValidator.resetValidation();
-  modalWindowEdit.open();
-});
-
-// слушатель кнопки открытия попапа добавления новой карточки
-modalWindowAddNewCardOpenBtn.addEventListener('click', () => {
-  // formAddNewCardValidator.resetValidation();
-  addImagePopup.open();
-});
-
-//функция редактирования профиля
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileTitle.textContent = nameInput.value;
-  profileSubtitle.textContent = jobInput.value;
-  modalWindowEdit.close();
-};
+// const userInfo = new UserInfo({
+//   username: '.profile__title',
+//   info: '.profile__subtitle'
+// })
 
 const createCard = (data) => {
   const card = new Card({
@@ -112,18 +99,17 @@ cardList.renderItems();
 
 const addImagePopup = new PopupWithForm({
   popupSelector: '.popup_type_add',
-  handleFormSubmit: (data) => {
-    cardList.addItem(createCard(data))
+  handleFormSubmit: (formData) => {
+    cardList.addItem(createCard(formData))
     addImagePopup.close();
   }
 })
 addImagePopup.setEventListeners();
 
-// Обработчик кнопки Submit попапа редактирования профиля
-formEditProfile.addEventListener('submit', handleProfileFormSubmit);
-
-
-
+// слушатель кнопки открытия попапа добавления новой карточки
+modalWindowAddNewCardOpenBtn.addEventListener('click', () => {
+  addImagePopup.open();
+});
 // валидация формы редактирования профиля
 const formEditProfileValidator = new FormValidator(config, formEditProfile);
 formEditProfileValidator.enableValidation();
