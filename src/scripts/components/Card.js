@@ -1,15 +1,11 @@
 'use strict'
+export default class Card {
+   constructor({ data, handleCardClick }, cardSelector) {
 
-import { cardImage, cardCaption, modalWindowImage} from '../index.js';
-
-export class Card {
-   constructor(title, image, cardSelector, openPopup, closePopup) {
-  
-      this._title = title;
-      this._image = image;
+      this._name = data.name;
+      this._link = data.link;
+      this._handleCardClick = handleCardClick;
       this._cardSelector = cardSelector;
-      this._openPopup = openPopup;
-      this._closePopup = closePopup;
    }
 
    //метод, который возвращает разметку
@@ -37,21 +33,13 @@ export class Card {
       this._element = null;
    }
 
-   // метод слушателя по картинке для просмотра изображения
-   _handleOpenPopup() {
-      cardImage.src = this._image;
-      cardImage.alt = this._title;
-      cardCaption.textContent = this._title;
-      this._openPopup(modalWindowImage);
-   }
-
    //метод добавления всех обработчиков
    _setEventListeners() {
       this._likeBtn = this._element.querySelector('.list__toggle');
-      
+
       // открытие попапа просмотра изображения кликом по изображению
-      this._cardImage.addEventListener('click', () => {
-         this._handleOpenPopup();
+      this._image.addEventListener('click', () => {
+         this._handleCardClick(this._name, this._link)
       })
 
       // слушатель кнопки удаления карточки
@@ -68,14 +56,14 @@ export class Card {
    //метод создания карточки 
    generateCard() {
       this._element = this._getTemplate();
-      this._cardImage = this._element.querySelector('.list__image');
+      this._image = this._element.querySelector('.list__image');
       this._setEventListeners();
 
-      this._element.querySelector('.list__title').textContent = this._title;
-      this._cardImage.src = this._image;
-      this._cardImage.alt = this._title;
+      this._element.querySelector('.list__title').textContent = this._name;
+      this._image.src = this._link;
+      this._image.alt = this._name;
 
       // Вернём элемент наружу
       return this._element;
-   } 
+   }
 }

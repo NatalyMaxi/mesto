@@ -2,8 +2,8 @@ export default class Popup {
    constructor(popupSelector) {
 
       this._popup = document.querySelector(popupSelector);
-      this._closeBtn = this._popup.querySelector('popup__close')
-      this._escClose = this._handleEscClose.bind(this)
+      this._closeBtn = this._popup.querySelector('.popup__close');
+      this._escClose = this._handleEscClose.bind(this);
    }
 
    // функция закрытия попапа на крестик и на оверлей
