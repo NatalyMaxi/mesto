@@ -3,7 +3,6 @@
 import { Card } from './components/Card.js';
 import { FormValidator } from './components/FormValidator.js';
 import Section from './components/Section.js';
-import Popup from './components/Popup.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';
 
@@ -52,8 +51,6 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 const modalWindowAdd = document.querySelector('.popup_type_add');;
 const modalWindowAddNewCardOpenBtn = document.querySelector('.profile__button');
 const formAddNewCard = modalWindowAdd.querySelector('[name="add-images"]');
-const regionInput = formAddNewCard.querySelector('[name="region"]');
-const linkInput = formAddNewCard.querySelector('[name="link"]');
 
 const buttonElement = formAddNewCard.querySelector('.form__submit');
 // попап просмотра изображения
@@ -76,32 +73,6 @@ const config = {
   errorClass: 'form__error_visible'
 };
 
-// function openPopup(modalWindowEdit) {
-//   modalWindowEdit.classList.add('popup_is-active');
-//   document.addEventListener('keyup', handleEscUp);
-// };
-
-// function closePopup(popup) {
-//   document.removeEventListener('keyup', handleEscUp);
-//   popup.classList.remove('popup_is-active');
-// };
-
-// const handleEscUp = (evt) => {
-//   if (evt.key === 'Escape') {
-//     const activePopup = document.querySelector('.popup_is-active')
-//     closePopup(activePopup);
-//   }
-// }
-
-// функция закрытия попапа кликом на оверлей и на крестик
-// popups.forEach((popup) => {
-//   popup.addEventListener('click', (evt) => {
-//     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
-//       closePopup(popup);
-//     }
-//   })
-// })
-
 //функция открытия попапа профиля и занесения  информации в инпуты
 profileEditingButton.addEventListener('click', function () {
   nameInput.value = profileTitle.textContent;
@@ -113,7 +84,7 @@ profileEditingButton.addEventListener('click', function () {
 // слушатель кнопки открытия попапа добавления новой карточки
 modalWindowAddNewCardOpenBtn.addEventListener('click', () => {
   // formAddNewCardValidator.resetValidation();
- addImagePopup.open();
+  addImagePopup.open();
 });
 
 //функция редактирования профиля
@@ -123,14 +94,6 @@ function handleProfileFormSubmit(evt) {
   profileSubtitle.textContent = jobInput.value;
   modalWindowEdit.close();
 };
-
-// функция загрузки карточек из массива
-// const renderInitialCards = (array) => {
-//   array.forEach((item) => {
-//     addCard(item.name, item.link);
-//   })
-// }
-
 
 const cardList = new Section({
   items: initialCards,
@@ -147,25 +110,11 @@ cardList.renderItems();
 function createCard(title, image) {
   const card = new Card(title, image, '.template', open, close);
   const cardElement = card.generateCard();
-  return cardElement
+  return cardElement;
 }
-
-// const addCard = (title, image) => {
-//   const card = createCard(title, image)
-//   cardsContainer.prepend(card);
-// };
 
 // Обработчик кнопки Submit попапа редактирования профиля
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
-
-// слушатель Submit формы создания карточки
-// formAddNewCard.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   addItem(regionInput.value, linkInput.value)
-//   modalWindowAdd.close();
-//   formAddNewCard.reset();
-// });
-
 
 const addImagePopup = new PopupWithForm({
   popupSelector: '.popup_type_add',
@@ -175,9 +124,6 @@ const addImagePopup = new PopupWithForm({
   }
 })
 addImagePopup.setEventListeners();
-
-// автоматическая загрузка карточек на страницу
-// renderInitialCards(initialCards);
 
 // валидация формы редактирования профиля
 const formEditProfileValidator = new FormValidator(config, formEditProfile);
