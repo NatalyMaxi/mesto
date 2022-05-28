@@ -80,8 +80,8 @@ bigImagePopup.setEventListeners();
 const createCard = (data) => {
   const card = new Card({
     data: data,
-    handleCardClick: (name, link) => {
-      bigImagePopup.open(name, link);
+    handleCardClick: () => {
+      bigImagePopup.open(data);
     }
   }, '.template');
   const cardElement = card.generateCard();
