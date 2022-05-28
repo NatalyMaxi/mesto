@@ -67,15 +67,38 @@ const config = {
 const bigImagePopup = new PopupWithImage('.popup_type_image');
 bigImagePopup.setEventListeners();
 
-// function addInfoFormProfile({ username, info }) {
-//   nameInput.value = username;
-//   jobInput.value = info;
-// }
+function addInfoFormProfile({ username, job }) {
+  nameInput.value = username;
+  jobInput.value = job;
+}
 
-// const userInfo = new UserInfo({
-//   username: '.profile__title',
-//   info: '.profile__subtitle'
-// })
+const userInfo = new UserInfo({
+  username: '.profile__title',
+  job: '.profile__subtitle'
+})
+
+const editProfilePopup = new PopupWithForm({
+  popupSelector: '.popup_type_edit',
+  handleFormSubmit: (data) => {
+    userInfo.setUserInfo({
+      username: data.username,
+      job: data.job
+    });
+    editProfilePopup.close();
+  }
+});
+
+editProfilePopup.setEventListeners();
+
+//функция открытия попапа профиля и занесения  информации в инпуты
+profileEditingButton.addEventListener('click', () => {
+  const info = userInfo.getUserInfo();
+  addInfoFormProfile({
+    username: info.username,
+    job: info.job
+  });
+  editProfilePopup.open();
+});
 
 const createCard = (data) => {
   const card = new Card({
@@ -99,8 +122,8 @@ cardList.renderItems();
 
 const addImagePopup = new PopupWithForm({
   popupSelector: '.popup_type_add',
-  handleFormSubmit: (formData) => {
-    cardList.addItem(createCard(formData))
+  handleFormSubmit: (data) => {
+    cardList.addItem(createCard(data))
     addImagePopup.close();
   }
 })
