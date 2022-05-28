@@ -5,6 +5,7 @@ import { FormValidator } from './components/FormValidator.js';
 import Section from './components/Section.js';
 import Popup from './components/Popup.js';
 import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
 
 //массив с карточками
 
@@ -111,8 +112,8 @@ profileEditingButton.addEventListener('click', function () {
 
 // слушатель кнопки открытия попапа добавления новой карточки
 modalWindowAddNewCardOpenBtn.addEventListener('click', () => {
-  formAddNewCardValidator.resetValidation();
-  modalWindowAdd.open();
+  // formAddNewCardValidator.resetValidation();
+ addImagePopup.open();
 });
 
 //функция редактирования профиля
@@ -158,12 +159,22 @@ function createCard(title, image) {
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
 // слушатель Submit формы создания карточки
-formAddNewCard.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  addItem(regionInput.value, linkInput.value)
-  modalWindowAdd.close();
-  formAddNewCard.reset();
-});
+// formAddNewCard.addEventListener('submit', (evt) => {
+//   evt.preventDefault();
+//   addItem(regionInput.value, linkInput.value)
+//   modalWindowAdd.close();
+//   formAddNewCard.reset();
+// });
+
+
+const addImagePopup = new PopupWithForm({
+  popupSelector: '.popup_type_add',
+  handleFormSubmit: (data) => {
+    cardList.addItem(createCard(data))
+    addImagePopup.close();
+  }
+})
+addImagePopup.setEventListeners();
 
 // автоматическая загрузка карточек на страницу
 // renderInitialCards(initialCards);
