@@ -63,6 +63,7 @@ const config = {
 const bigImagePopup = new PopupWithImage('.popup_type_image');
 bigImagePopup.setEventListeners();
 
+//функция занесения  информации в инпуты папапа профиля
 function addInfoFormProfile({ username, job }) {
   nameInput.value = username;
   jobInput.value = job;
@@ -73,6 +74,7 @@ const userInfo = new UserInfo({
   job: '.profile__subtitle'
 })
 
+//создание попапа профиля 
 const editProfilePopup = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   handleFormSubmit: (data) => {
@@ -93,9 +95,11 @@ profileEditingButton.addEventListener('click', () => {
     username: info.username,
     job: info.job
   });
+  formEditProfileValidator.resetValidation();
   editProfilePopup.open();
 });
 
+//создание новой карточки
 const createCard = (data) => {
   const card = new Card({
     data: data,
@@ -127,6 +131,7 @@ addImagePopup.setEventListeners();
 
 // слушатель кнопки открытия попапа добавления новой карточки
 modalWindowAddNewCardOpenBtn.addEventListener('click', () => {
+  formAddNewCardValidator.resetValidation();
   addImagePopup.open();
 });
 // валидация формы редактирования профиля
