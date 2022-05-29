@@ -40,11 +40,8 @@ const initialCards = [
 const modalWindowEdit = document.querySelector('.popup_type_edit');
 const profileEditingButton = document.querySelector('.profile__btn');
 const formEditProfile = modalWindowEdit.querySelector('[name="subscribeForm"]');
-const nameInput = formEditProfile.querySelector('[name="full-name"]');
-const jobInput = formEditProfile.querySelector('[name="about-me"]');
-// выбираем куда будут импортироваться данные из формы
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
+const nameInput = formEditProfile.querySelector('[name="username"]');
+const jobInput = formEditProfile.querySelector('[name="job"]');
 
 
 // попап добавления карточки
@@ -52,8 +49,7 @@ const modalWindowAdd = document.querySelector('.popup_type_add');;
 const modalWindowAddNewCardOpenBtn = document.querySelector('.profile__button');
 const formAddNewCard = modalWindowAdd.querySelector('[name="add-images"]');
 
-// находим контейнер для карточек
-const cardsContainer = document.querySelector('.list');
+
 
 const config = {
   formSelector: '.form',
