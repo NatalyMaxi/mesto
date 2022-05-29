@@ -15,7 +15,7 @@ module.exports = {
    mode: 'development',
    devtool: 'source-map',
    devServer: {
-      contentBase: path.resolve(__dirname, './dist'),
+      static: './dist',
       open: true,
       compress: true,
       port: 8080
