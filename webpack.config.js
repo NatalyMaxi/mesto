@@ -13,6 +13,7 @@ module.exports = {
       publicPath: '',
    },
    mode: 'development',
+   devtool: 'source-map',
    devServer: {
       contentBase: path.resolve(__dirname, './dist'),
       open: true,
