@@ -103,8 +103,8 @@ profileEditingButton.addEventListener('click', () => {
 const createCard = (data) => {
   const card = new Card({
     data: data,
-    handleCardClick: () => {
-      bigImagePopup.open(data);
+    handleCardClick: (name, link) => {
+      bigImagePopup.open({ name, link });
     }
   }, '.template');
   const cardElement = card.generateCard();
