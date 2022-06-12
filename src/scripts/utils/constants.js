@@ -34,6 +34,11 @@ const formEditProfile = modalWindowEdit.querySelector('[name="subscribeForm"]');
 const nameInput = formEditProfile.querySelector('[name="username"]');
 const jobInput = formEditProfile.querySelector('[name="job"]');
 
+//попап редактирования аватара
+const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
+const btnEditAvatar = document.querySelector('.profile__btn-avatar');
+const formEditAvatar = popupEditAvatar.querySelector('[name="edit-avatar"]');
+
 // попап добавления карточки
 const modalWindowAdd = document.querySelector('.popup_type_add');;
 const modalWindowAddNewCardOpenBtn = document.querySelector('.profile__button');
@@ -54,6 +59,8 @@ export {
    formEditProfile,
    nameInput,
    jobInput,
+   formEditAvatar,
+   btnEditAvatar,
    modalWindowAddNewCardOpenBtn,
    formAddNewCard,
    config

@@ -13,6 +13,8 @@ import {
   formEditProfile,
   nameInput,
   jobInput,
+  formEditAvatar,
+  btnEditAvatar,
   modalWindowAddNewCardOpenBtn,
   formAddNewCard,
   config
