@@ -60,6 +60,22 @@ profileEditingButton.addEventListener('click', () => {
   editProfilePopup.open();
 });
 
+//создание попапа редактирования аватара
+const editAvatarPopup = new PopupWithForm({
+  popupSelector: '.popup_type_edit-avatar',
+  handleFormSubmit: (data) => {
+    avatar.src = data.avatar
+    editAvatarPopup.close();
+  }
+})
+editAvatarPopup.setEventListeners();
+
+//функция открытия попапа редактирования аватара
+btnEditAvatar.addEventListener('click', () => {
+  formEditAvatarValidator.resetValidation();
+  editAvatarPopup.open();
+})
+
 //создание новой карточки
 const createCard = (data) => {
   const card = new Card({
@@ -103,4 +119,7 @@ formEditProfileValidator.enableValidation();
 const formAddNewCardValidator = new FormValidator(config, formAddNewCard);
 formAddNewCardValidator.enableValidation();
 
+// валидация формы редактирования аватара
+const formEditAvatarValidator = new FormValidator(config, formEditAvatar);
+formEditAvatarValidator.enableValidation();
 
