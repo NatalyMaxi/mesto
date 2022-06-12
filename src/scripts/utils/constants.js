@@ -38,6 +38,7 @@ const jobInput = formEditProfile.querySelector('[name="job"]');
 const popupEditAvatar = document.querySelector('.popup_type_edit-avatar');
 const btnEditAvatar = document.querySelector('.profile__btn-avatar');
 const formEditAvatar = popupEditAvatar.querySelector('[name="edit-avatar"]');
+const avatar = document.querySelector('.profile__image');
 
 // попап добавления карточки
 const modalWindowAdd = document.querySelector('.popup_type_add');;
@@ -61,6 +62,7 @@ export {
    jobInput,
    formEditAvatar,
    btnEditAvatar,
+   avatar,
    modalWindowAddNewCardOpenBtn,
    formAddNewCard,
    config

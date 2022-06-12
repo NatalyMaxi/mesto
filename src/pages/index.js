@@ -15,6 +15,7 @@ import {
   jobInput,
   formEditAvatar,
   btnEditAvatar,
+  avatar,
   modalWindowAddNewCardOpenBtn,
   formAddNewCard,
   config
