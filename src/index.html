@@ -78,6 +78,24 @@
             </form>
          </div>
       </div>
+      <div class="popup popup_type_edit-avatar">
+         <div class="popup__content">
+            <button class="popup__close" type="button"></button>
+            <h3 class="popup__title">Обновить аватар</h3>
+            <form class="form" name="edit-avatar">
+               <input id="avatar" required type="url" placeholder="Ссылка на аватар" class="form__item" name="avatar">
+               <button class="form__button" type="submit" aria-label="Сохранить">Сохранить</button>
+            </form>
+         </div>
+      
+         <div class="popup popup_type_delete-card">
+            <div class="popup__content">
+               <button class="popup__close" type="button"></button>
+               <h3 class="popup__title">Вы уверены?</h3>
+               <form class="form" name="delete-card" novalidate>
+                  <button class="form__button" type="submit" aria-label="Да">Да</button>
+               </form>
+            </div>
       <template class="template">
          <li class="list__items">
             <img src="#" alt="#" class="list__image">
