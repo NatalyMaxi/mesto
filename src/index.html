@@ -16,7 +16,10 @@
       </header>
       <main class="content">
          <section class="profile">
-            <img class="profile__image" src="<%=require('./images/image.jpg')%>" alt="Аватар">
+            <div class="profile__container-avatar">
+               <button class="profile__btn-avatar"></button>
+               <img class="profile__image" src="<%=require('./images/image.jpg')%>" alt="Аватар">
+            </div>
             <div class="profile__info">
                <h1 class="profile__title">Жак-Ив Кусто</h1>
                <button class="profile__btn" type="button" aria-label="Редактировать"></button>
@@ -87,7 +90,6 @@
                <button class="form__button" type="submit" aria-label="Сохранить">Сохранить</button>
             </form>
          </div>
-      
          <div class="popup popup_type_delete-card">
             <div class="popup__content">
                <button class="popup__close" type="button"></button>
@@ -96,18 +98,18 @@
                   <button class="form__button" type="submit" aria-label="Да">Да</button>
                </form>
             </div>
-      <template class="template">
-         <li class="list__items">
-            <img src="#" alt="#" class="list__image">
-            <div class="list__item">
-               <h2 class="list__title"></h2>
-               <button class="list__toggle" type="button" aria-label="Отметить"></button>
-               <button class="list__btn" type="button" aria-label="Удалить"></button>
-            </div>
-         </li>
-      </template>
-   </div>
-   <!-- <script  type="module" src="./pages/index.js"></script> -->
+            <template class="template">
+               <li class="list__items">
+                  <img src="#" alt="#" class="list__image">
+                  <div class="list__item">
+                     <h2 class="list__title"></h2>
+                     <button class="list__toggle" type="button" aria-label="Отметить"></button>
+                     <button class="list__btn" type="button" aria-label="Удалить"></button>
+                  </div>
+               </li>
+            </template>
+         </div>
+         <!-- <script  type="module" src="./pages/index.js"></script> -->
 </body>
 
 </html>
