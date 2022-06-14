@@ -7,6 +7,7 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
+import PopupWithSubmit from '../scripts/components/PopupWithSubmit.js';
 
 import {
   profileEditingButton,
@@ -41,6 +42,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 const bigImagePopup = new PopupWithImage('.popup_type_image');
 bigImagePopup.setEventListeners();
 
+const deletePopup = new PopupWithSubmit('.popup_type_delete-card');
+deletePopup.setEventListeners();
+
 //функция занесения  информации в инпуты папапа профиля
 function addInfoFormProfile({ username, job }) {
   nameInput.value = username;
@@ -62,6 +66,7 @@ const editProfilePopup = new PopupWithForm({
       .then((data) => {
         console.log(data);
         userInfo.setUserInfo(data);
+        editProfilePopup.close()
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -92,6 +97,7 @@ const editAvatarPopup = new PopupWithForm({
     api.updateAvatar(data)
       .then((data) => {
         avatar.src = data.avatar;
+        editAvatarPopup.close()
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -143,7 +149,6 @@ const addImagePopup = new PopupWithForm({
       })
   }
 })
-
 addImagePopup.setEventListeners();
 
 // слушатель кнопки открытия попапа добавления новой карточки
