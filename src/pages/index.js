@@ -9,7 +9,7 @@ import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
 import {
-  initialCards,
+  // initialCards,
   profileEditingButton,
   formEditProfile,
   nameInput,
@@ -63,7 +63,7 @@ const editProfilePopup = new PopupWithForm({
       .then((data) => {
         console.log(data);
         userInfo.setUserInfo(data);
-        editProfilePopup.close();
+        // editProfilePopup.close();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -95,7 +95,7 @@ const editAvatarPopup = new PopupWithForm({
     api.updateAvatar(data)
       .then((data) => {
         avatar.src = data.avatar;
-        editAvatarPopup.close();
+        // editAvatarPopup.close();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -126,13 +126,13 @@ const createCard = (data) => {
 }
 
 const cardList = new Section({
-  items: initialCards,
+  // items: initialCards,
   renderer: (item) => {
     cardList.addItem(createCard(item));
   },
 }, '.list');
 
-cardList.renderItems();
+// cardList.renderItems();
 
 const addImagePopup = new PopupWithForm({
   popupSelector: '.popup_type_add',
