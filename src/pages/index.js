@@ -50,18 +50,27 @@ function addInfoFormProfile({ username, job }) {
 
 const userInfo = new UserInfo({
   username: '.profile__title',
-  job: '.profile__subtitle'
+  job: '.profile__subtitle',
+  avatar: '.profile__image'
 })
 
-//создание попапа профиля 
+//создание попапа редактирования профиля 
 const editProfilePopup = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   handleFormSubmit: (data) => {
-    userInfo.setUserInfo({
-      username: data.username,
-      job: data.job
-    });
-    editProfilePopup.close();
+    editProfilePopup.loading(true);
+    api.updateUserInfo(data)
+      .then((data) => {
+        console.log(data);
+        userInfo.setUserInfo(data);
+        editProfilePopup.close();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        editProfilePopup.loading(false);
+      })
   }
 });
 
@@ -74,24 +83,34 @@ profileEditingButton.addEventListener('click', () => {
     username: info.username,
     job: info.job
   });
-  formEditProfileValidator.resetValidation();
   editProfilePopup.open();
+  // formEditProfileValidator.resetValidation();
 });
 
 //создание попапа редактирования аватара
 const editAvatarPopup = new PopupWithForm({
   popupSelector: '.popup_type_edit-avatar',
   handleFormSubmit: (data) => {
-    avatar.src = data.avatar
-    editAvatarPopup.close();
+    editAvatarPopup.loading(true);
+    api.updateAvatar(data)
+      .then((data) => {
+        avatar.src = data.avatar;
+        editAvatarPopup.close();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        editAvatarPopup.loading(false);
+      });
   }
 })
 editAvatarPopup.setEventListeners();
 
 //функция открытия попапа редактирования аватара
 btnEditAvatar.addEventListener('click', () => {
-  formEditAvatarValidator.resetValidation();
   editAvatarPopup.open();
+  // formEditAvatarValidator.resetValidation();
 })
 
 //создание новой карточки
