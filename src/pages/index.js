@@ -129,10 +129,21 @@ const cardList = new Section({
 const addImagePopup = new PopupWithForm({
   popupSelector: '.popup_type_add',
   handleFormSubmit: (data) => {
-    cardList.addItem(createCard(data))
-    addImagePopup.close();
+    addImagePopup.loading(true);
+    api.addNewCard(data)
+      .then((data) => {
+        cardList.addItem(createCard(data))
+        addImagePopup.close();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        addImagePopup.loading(false);
+      })
   }
 })
+
 addImagePopup.setEventListeners();
 
 // слушатель кнопки открытия попапа добавления новой карточки
