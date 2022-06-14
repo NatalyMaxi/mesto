@@ -1,9 +1,13 @@
 'use strict'
 export default class Card {
-   constructor({ data, handleCardClick }, cardSelector) {
+   constructor({ data, userId, handleCardClick }, cardSelector) {
 
       this._name = data.name;
       this._link = data.link;
+      this._id = data._id;
+      this._userId = userId;
+      this._like = data.likes.length;
+      this._likes = data.likes;
       this._handleCardClick = handleCardClick;
       this._cardSelector = cardSelector;
    }
@@ -22,9 +26,14 @@ export default class Card {
       return cardElement;
    }
 
+   getId() {
+      return this._id;
+   }
+
    // метод слушателя по кнопке - "лайк"
    _handleLikeCard() {
       this._likeBtn.classList.toggle('list__toggle_active');
+      this._likeCounter.textContent = this._like.length;
    }
 
    // метод слушателя по кнопке - "удалить"
@@ -36,6 +45,7 @@ export default class Card {
    //метод добавления всех обработчиков
    _setEventListeners() {
       this._likeBtn = this._element.querySelector('.list__toggle');
+      this._likeCounter = this._element.querySelector('.list__like-counter')
 
       // открытие попапа просмотра изображения кликом по изображению
       this._image.addEventListener('click', () => {
@@ -62,6 +72,7 @@ export default class Card {
       this._element.querySelector('.list__title').textContent = this._name;
       this._image.src = this._link;
       this._image.alt = this._name;
+      this._likeCounter.textContent = this._likes.length;
 
       // Вернём элемент наружу
       return this._element;
