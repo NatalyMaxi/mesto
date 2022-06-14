@@ -6,6 +6,7 @@ import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../components/Api.js';
 
 import {
   initialCards,
@@ -21,6 +22,22 @@ import {
   config
 } from '../scripts/utils/constants.js';
 
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-43',
+  headers: {
+    authorization: 'b10a53e7-258a-42fe-a6a2-62c2a434b14a',
+    'Content-Type': 'application/json'
+  }
+})
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, initialCards]) => {
+    userInfo.setUserInfo(userData);
+    cardList.renderItems(initialCards);
+  })
+  .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+  })
 
 const bigImagePopup = new PopupWithImage('.popup_type_image');
 bigImagePopup.setEventListeners();
