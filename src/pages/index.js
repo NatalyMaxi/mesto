@@ -9,7 +9,6 @@ import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
 import {
-  // initialCards,
   profileEditingButton,
   formEditProfile,
   nameInput,
@@ -63,7 +62,6 @@ const editProfilePopup = new PopupWithForm({
       .then((data) => {
         console.log(data);
         userInfo.setUserInfo(data);
-        // editProfilePopup.close();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -84,7 +82,6 @@ profileEditingButton.addEventListener('click', () => {
     job: info.job
   });
   editProfilePopup.open();
-  // formEditProfileValidator.resetValidation();
 });
 
 //создание попапа редактирования аватара
@@ -95,7 +92,6 @@ const editAvatarPopup = new PopupWithForm({
     api.updateAvatar(data)
       .then((data) => {
         avatar.src = data.avatar;
-        // editAvatarPopup.close();
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -110,7 +106,6 @@ editAvatarPopup.setEventListeners();
 //функция открытия попапа редактирования аватара
 btnEditAvatar.addEventListener('click', () => {
   editAvatarPopup.open();
-  // formEditAvatarValidator.resetValidation();
 })
 
 //создание новой карточки
@@ -126,13 +121,10 @@ const createCard = (data) => {
 }
 
 const cardList = new Section({
-  // items: initialCards,
   renderer: (item) => {
     cardList.addItem(createCard(item));
   },
 }, '.list');
-
-// cardList.renderItems();
 
 const addImagePopup = new PopupWithForm({
   popupSelector: '.popup_type_add',
