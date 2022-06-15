@@ -118,13 +118,27 @@ btnEditAvatar.addEventListener('click', () => {
 const createCard = (data) => {
   const card = new Card({
     data: data,
-    handleCardClick: (name, link) => {
-      bigImagePopup.open({ name, link });
-    }
+    userId: userInfo.getUserId(),
+    handleCardClick: () => {
+      bigImagePopup.open(data);
+    },
+    handleDeleteCard: () => {
+      deletePopup.open();
+      deletePopup.setSubmitAction(() => {
+        api.deleteCard(card.getId())
+          .then(() => {
+            card.deleteCard();
+            deletePopup.close();
+          })
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          });
+      });
+    },
   }, '.template');
-  const cardElement = card.generateCard();
-  return cardElement;
+  return card.generateCard();
 }
+
 
 const cardList = new Section({
   renderer: (item) => {

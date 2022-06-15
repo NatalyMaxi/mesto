@@ -1,29 +1,27 @@
 'use strict'
 export default class Card {
-   constructor({ data, userId, handleCardClick }, cardSelector) {
+   constructor({ data, userId, handleCardClick, handleDeleteCard }, cardSelector) {
 
       this._name = data.name;
       this._link = data.link;
       this._id = data._id;
       this._userId = userId;
+      this._owner = data.owner._id;
       this._like = data.likes.length;
       this._likes = data.likes;
       this._handleCardClick = handleCardClick;
+      this._handleDeleteCard = handleDeleteCard;
       this._cardSelector = cardSelector;
    }
 
-   //метод, который возвращает разметку
+   // метод, который возвращает разметку
+   // забираем разметку из HTML  клонируем элемент и  вернём DOM-элемент карточки
    _getTemplate() {
-
-      // забираем разметку из HTML и клонируем элемент
-      const cardElement = document
+      return document
          .querySelector(this._cardSelector)
          .content
          .querySelector('.list__items')
          .cloneNode(true);
-
-      // вернём DOM-элемент карточки
-      return cardElement;
    }
 
    getId() {
@@ -37,23 +35,21 @@ export default class Card {
    }
 
    // метод слушателя по кнопке - "удалить"
-   _handleDeleteCard() {
+   deleteCard() {
       this._element.remove();
       this._element = null;
    }
 
    //метод добавления всех обработчиков
    _setEventListeners() {
-      this._likeBtn = this._element.querySelector('.list__toggle');
-      this._likeCounter = this._element.querySelector('.list__like-counter')
 
       // открытие попапа просмотра изображения кликом по изображению
       this._image.addEventListener('click', () => {
-         this._handleCardClick(this._name, this._link)
+         this._handleCardClick()
       })
 
       // слушатель кнопки удаления карточки
-      this._element.querySelector('.list__btn').addEventListener('click', () => {
+      this._deleteIcon.addEventListener('click', () => {
          this._handleDeleteCard();
       })
 
@@ -63,16 +59,27 @@ export default class Card {
       });
    }
 
+   _checkDeleteState() {
+      if (this._owner !== this._userId) {
+         this._deleteIcon.remove();
+      }
+   }
+
+
+
    //метод создания карточки 
    generateCard() {
       this._element = this._getTemplate();
       this._image = this._element.querySelector('.list__image');
+      this._likeBtn = this._element.querySelector('.list__toggle');
+      this._deleteIcon = this._element.querySelector('.list__btn');
+      this._likeCounter = this._element.querySelector('.list__like-counter')
       this._setEventListeners();
-
+      this._checkDeleteState();
       this._element.querySelector('.list__title').textContent = this._name;
       this._image.src = this._link;
       this._image.alt = this._name;
-      this._likeCounter.textContent = this._likes.length;
+      this._likeCounter.textContent = this._like;
 
       // Вернём элемент наружу
       return this._element;
