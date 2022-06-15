@@ -1,3 +1,4 @@
+'use strict'
 
 // попап редактирования профиля
 const modalWindowEdit = document.querySelector('.popup_type_edit');

@@ -1,3 +1,5 @@
+'use strict'
+
 export default class UserInfo {
    constructor({ username, job, avatar }) {
       this._username = document.querySelector(username);

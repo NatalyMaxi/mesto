@@ -1,4 +1,5 @@
 'use strict'
+
 import './index.css';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -135,6 +136,24 @@ const createCard = (data) => {
           });
       });
     },
+    handleAddLike: () => {
+      api.addLike(card.getId())
+        .then((data) => {
+          card.handleLikeCard(data);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    },
+    handleDeleteLike: () => {
+      api.deleteLike(card.getId())
+        .then((data) => {
+          card.handleLikeCard(data);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    }
   }, '.template');
   return card.generateCard();
 }

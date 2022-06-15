@@ -1,16 +1,18 @@
 'use strict'
+
 export default class Card {
-   constructor({ data, userId, handleCardClick, handleDeleteCard }, cardSelector) {
+   constructor({ data, userId, handleCardClick, handleDeleteCard, handleAddLike, handleDeleteLike }, cardSelector) {
 
       this._name = data.name;
       this._link = data.link;
       this._id = data._id;
       this._userId = userId;
       this._owner = data.owner._id;
-      this._like = data.likes.length;
       this._likes = data.likes;
       this._handleCardClick = handleCardClick;
       this._handleDeleteCard = handleDeleteCard;
+      this._handleAddLike = handleAddLike;
+      this._handleDeleteLike = handleDeleteLike;
       this._cardSelector = cardSelector;
    }
 
@@ -29,9 +31,10 @@ export default class Card {
    }
 
    // метод слушателя по кнопке - "лайк"
-   _handleLikeCard() {
+   handleLikeCard(data) {
+      this._likes = data.likes;
       this._likeBtn.classList.toggle('list__toggle_active');
-      this._likeCounter.textContent = this._like.length;
+      this._likeCounter.textContent = this._likes.length;
    }
 
    // метод слушателя по кнопке - "удалить"
@@ -40,32 +43,44 @@ export default class Card {
       this._element = null;
    }
 
-   //метод добавления всех обработчиков
-   _setEventListeners() {
-
-      // открытие попапа просмотра изображения кликом по изображению
-      this._image.addEventListener('click', () => {
-         this._handleCardClick()
-      })
-
-      // слушатель кнопки удаления карточки
-      this._deleteIcon.addEventListener('click', () => {
-         this._handleDeleteCard();
-      })
-
-      // слушатель кнопки лайка
-      this._likeBtn.addEventListener('click', () => {
-         this._handleLikeCard();
-      });
+   //метод ставит либо убирает "лайк"
+   _checkLikeState() {
+      if (this._likeBtn.classList.contains('list__toggle_active')) {
+         this._handleDeleteLike(this._id);
+      } else {
+         this._handleAddLike(this._id);
+      }
    }
 
+   //убираем кнопку "удалить", если картинка не пренадлежит пользователю
    _checkDeleteState() {
       if (this._owner !== this._userId) {
          this._deleteIcon.remove();
       }
    }
 
+   //проверка пользовательского "лайка"
+   _isLiked() {
+      if (this._likes.some((user) => {
+         return this._userId === user._id;
+      })) {
+         this._likeBtn.classList.add('list__toggle_active');
+      }
+   }
 
+   //метод добавления всех обработчиков
+   _setEventListeners() {
+
+      this._image.addEventListener('click', () => {
+         this._handleCardClick()
+      })
+      this._deleteIcon.addEventListener('click', () => {
+         this._handleDeleteCard();
+      })
+      this._likeBtn.addEventListener('click', () => {
+         this._checkLikeState()
+      });
+   }
 
    //метод создания карточки 
    generateCard() {
@@ -76,10 +91,11 @@ export default class Card {
       this._likeCounter = this._element.querySelector('.list__like-counter')
       this._setEventListeners();
       this._checkDeleteState();
+      this._isLiked();
       this._element.querySelector('.list__title').textContent = this._name;
       this._image.src = this._link;
       this._image.alt = this._name;
-      this._likeCounter.textContent = this._like;
+      this._likeCounter.textContent = this._likes.length;
 
       // Вернём элемент наружу
       return this._element;
