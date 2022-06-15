@@ -30,7 +30,9 @@ export default class PopupWithForm extends Popup {
          evt.preventDefault();
           // передадим ф-и объект — результат работы _getInputValues
          this._handleFormSubmit(this._getInputValues())
+         this.close();
       })
+      
    }
 
    close() {

@@ -67,7 +67,6 @@ const editProfilePopup = new PopupWithForm({
       .then((data) => {
         console.log(data);
         userInfo.setUserInfo(data);
-        editProfilePopup.close()
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -98,7 +97,6 @@ const editAvatarPopup = new PopupWithForm({
     api.updateAvatar(data)
       .then((data) => {
         avatar.src = data.avatar;
-        editAvatarPopup.close()
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -129,7 +127,6 @@ const createCard = (data) => {
         api.deleteCard(card.getId())
           .then(() => {
             card.deleteCard();
-            deletePopup.close();
           })
           .catch((err) => {
             console.log(`Ошибка: ${err}`);
@@ -157,7 +154,6 @@ const createCard = (data) => {
   }, '.template');
   return card.generateCard();
 }
-
 
 const cardList = new Section({
   renderer: (item) => {
