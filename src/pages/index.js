@@ -160,7 +160,7 @@ const createCard = (data) => {
 
 const cardList = new Section({
   renderer: (item) => {
-    cardList.addItem(createCard(item));
+    cardList.addCardAppend(createCard(item));
   },
 }, '.list');
 

@@ -7,6 +7,10 @@ export default class Section {
       this._container = document.querySelector(containerSelector);
    }
 
+
+   addCardAppend(element) {
+      this._container.append(element);
+   }
    renderItems(items) {
       items.forEach(item => {this._renderer(item)});
    };
