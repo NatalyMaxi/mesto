@@ -1,8 +1,0 @@
-.list__items {
-   display: flex;
-   flex-direction: column;
-   border-radius: 10px;
-   background-color: #ffffff;
-   overflow: hidden;
-   position: relative;
-}
