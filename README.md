@@ -12,7 +12,6 @@
   - Семантические теги
 - CSS3:
   - Flexbox;
-  - Grid Layout;
   - Media Queries;
   - Positioning of blocks and elements;
   - Adaptive UI;
